@@ -1,0 +1,22 @@
+[
+    {
+      "op": "add",
+      "path": "/-",
+      "value": "editmessage"
+    },  
+    {
+        "op": "add",
+        "path": "/-",
+        "value": "oocchat"
+    },
+    {
+        "op": "add",
+        "path": "/-",
+        "value": "proximitychat"
+    },
+    {
+        "op": "add",
+        "path": "/-",
+        "value": "rpchat"
+    }
+  ]

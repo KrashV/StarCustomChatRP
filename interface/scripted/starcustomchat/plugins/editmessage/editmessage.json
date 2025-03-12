@@ -1,0 +1,33 @@
+{
+  "name": "Edit messages",
+
+  "localeKeys": {
+    "chat.commands.edit": {
+      "ru": "Редактировать",
+      "en": "Edit message"
+    },
+    "chat.editing.hint": {
+      "ru": "Редактирование: ",
+      "en": "Editing: "
+    }
+  },
+
+  "contextMenuButtons": [
+    {
+      "name": "edit",
+      "base": "/interface/scripted/starcustomchat/plugins/editmessage/contextmenu/editmessage.png:base",
+      "hover": "/interface/scripted/starcustomchat/plugins/editmessage/contextmenu/editmessage.png:hover",
+      "filter": "ctxEditFilter",
+      "callback": "ctxEdit",
+      "tooltip": "chat.commands.edit"
+    }
+  ],
+
+  "parameters": {
+    "stagehandType": "irdencustomchat",
+    "highlightEditColor": "#886e447f",
+    "trimLength": 40
+  },
+
+  "script": "/interface/scripted/starcustomchat/plugins/editmessage/editmessage.lua"
+}

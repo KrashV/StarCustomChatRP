@@ -1,0 +1,47 @@
+name: Generate Archive and Create Release
+
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Pak the repository
+        run: |
+          .github/tools/asset_packer.exe . -c .github/tools/packing.config StarCustomChatRP.pak
+
+      - name: Get version
+        id: extract_version
+        run: echo "::set-output name=version::$(jq -r '.version' _metadata)"
+
+      - name: 'Create GitHub Release'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: CHANGELOG.txt
+          files: StarCustomChatRP.pak       
+          tag_name: v${{ steps.extract_version.outputs.version }}
+          name: Release V${{ steps.extract_version.outputs.version }}
+
+      - name: Get changelog content
+        id: read_file
+        uses: andstor/file-reader-action@v1
+        with:
+          path: "CHANGELOG.txt"
+
+      - name: Discord Webhook For Delivery
+        uses: tsickert/discord-webhook@v6.0.0
+        with:
+          webhook-url: ${{ secrets.DELIVERY_DISCORD_URL }}
+          filename: StarCustomChatRP.pak  
+          content: "StarCustomChatRP V${{ steps.extract_version.outputs.version }}\n${{ steps.read_file.outputs.contents }}"

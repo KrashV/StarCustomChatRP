@@ -1,0 +1,68 @@
+{
+  "name": "Roleplay chat",
+
+  "modes": [{
+    "name": "Announcement",
+    "admin": true,
+    "has_tab": true,
+    "priority": 200,
+    "has_toggle": false
+  }],
+
+  "settingsPluginAddons": {
+    "colors": {
+      "items": [
+        {
+          "name": "actionstext",
+          "label": "settings.colors.actionstext",
+          "default": "575757"
+        },
+        {
+          "name": "thoughtstext",
+          "label": "settings.colors.thoughtstext",
+          "default": "A9468C"
+        }
+      ]
+    }
+  },
+
+  "baseConfigValues": {
+    "modeColors": {
+      "Announcement" : "red"
+    },
+    "textColors": {
+      "Announcement" : "white"
+    }
+  },
+
+  "parameters": {
+    "stagehandType": "irdencustomchat",
+
+    
+    "defaultActionsColor": "575757",
+    "defaultThoughtsColor": "A9468C",
+
+    "announcementPrefix": "^clear;!!^reset;",
+
+    "modeIcons": {
+      "server": "/interface/scripted/starcustomchat/base/icons/server.png"
+    }
+  },
+
+  "localeKeys": {
+    "chat.modes.Announcement": {
+      "ru": "Важное",
+      "en": "Announcement"
+    },
+    "settings.colors.actionstext": {
+      "ru": "*Действия*",
+      "en": "*Actions*"
+    },
+    "settings.colors.thoughtstext": {
+      "ru": "%Мысли%",
+      "en": "%Thoughts%"
+    }
+  },
+
+  "script": "/interface/scripted/starcustomchat/plugins/rpchat/rpchat.lua"
+}

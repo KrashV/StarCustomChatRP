@@ -1,0 +1,9 @@
+{
+  "version" : "1.8.2",
+  "author" : "Degranon",
+  "requires" : [],
+  "description" : "Star Custom Chat RP: a plugin for Star Custom Chat with roleplay abilities.",
+  "path" : ".",
+  "name" : "starcustomchatrp",
+  "includes" : ["starcustomchat"]
+}
