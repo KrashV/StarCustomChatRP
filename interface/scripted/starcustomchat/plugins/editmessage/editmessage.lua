@@ -71,7 +71,7 @@ function editmessage:onTextboxEnter()
       nickname = self.editingMessage.nickname
     }
     if self.stagehandType then
-      starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "editMessage", data})
+      starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "editMessage", data = data})
     else
       for _, pl in ipairs(world.playerQuery(world.entityPosition(player.id()), 100)) do 
         world.sendEntityMessage(pl, "icc_message_edited", data)
