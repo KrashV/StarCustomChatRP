@@ -1,17 +1,6 @@
 {
   "name": "Edit messages",
 
-  "localeKeys": {
-    "chat.commands.edit": {
-      "ru": "Редактировать",
-      "en": "Edit message"
-    },
-    "chat.editing.hint": {
-      "ru": "Редактирование: ",
-      "en": "Editing: "
-    }
-  },
-
   "contextMenuButtons": [
     {
       "name": "edit",

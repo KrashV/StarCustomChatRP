@@ -30,9 +30,5 @@
     "defaultColor": "575757"
   },
 
-  "localeKeys": {
-    "chat.modes.OOC": "OOC"
-  },
-
   "script": "/interface/scripted/starcustomchat/plugins/oocchat/oocchat.lua"
 }

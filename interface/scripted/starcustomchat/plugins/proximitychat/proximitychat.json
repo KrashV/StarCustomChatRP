@@ -20,25 +20,6 @@
     "proximityRadius": 100
   },
 
-  "localeKeys": {
-    "chat.modes.Proximity": {
-      "ru": "Близкий",
-      "en": "Proximity"
-    },
-    "settings.proximity.radius": {
-      "ru": "Радиус близких сообщений",
-      "en": "Proximity radius"
-    },
-    "settings.plugins.proximitychat": {
-      "ru": "Близкий чат",
-      "en": "Proximity chat"
-    },
-    "settings.proximity.restrict_description": {
-      "ru": "Получать близкие сообщения только от персонажей в радиусе",
-      "en": "Only receive the proximity based messages from the players in the set radius"
-    }
-  },
-
   "settingsPage": {
     "tabButtons": {
       "baseImage": "/interface/scripted/starcustomchat/plugins/proximitychat/settingstabs/tab.png",
