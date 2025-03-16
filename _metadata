@@ -1,9 +1,13 @@
 {
-  "version" : "1.9.0",
   "author" : "Degranon",
-  "requires" : [],
-  "description" : "Star Custom Chat RP: a plugin for Star Custom Chat with roleplay abilities.",
-  "path" : ".",
+  "description" : "Star Custom Chat RP: a plugin for Star Custom Chat with roleplay abilities.\n",
+  "friendlyName" : "StarCustomChatRP",
+  "includes" : ["starcustomchat"],
+  "link" : "steam://url/CommunityFilePage/3445409664",
   "name" : "starcustomchatrp",
-  "includes" : ["starcustomchat"]
+  "path" : ".",
+  "requires" : [],
+  "steamContentId" : "3445409664",
+  "tags" : "User Interface",
+  "version" : "1.9.0"
 }
