@@ -18,5 +18,10 @@
         "op": "add",
         "path": "/-",
         "value": "rpchat"
+    },
+    {
+        "op": "add",
+        "path": "/-",
+        "value": "languages"
     }
   ]

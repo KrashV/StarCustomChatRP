@@ -10,17 +10,17 @@ function proximitychat:init()
   self:_loadConfig()
 
   self.proximityRadius = root.getConfiguration("scc_proximity_radius") or self.proximityRadius
-  widget.setSliderRange(self.layoutWidget .. ".sldProxRadius", 0, 90, 1)
-  widget.setSliderValue(self.layoutWidget .. ".sldProxRadius", self.proximityRadius - 10)
-  widget.setText(self.layoutWidget .. ".lblProxRadiusValue", self.proximityRadius)
+  self.widget.setSliderRange("sldProxRadius", 0, 90, 1)
+  self.widget.setSliderValue("sldProxRadius", self.proximityRadius - 10)
+  self.widget.setText("lblProxRadiusValue", self.proximityRadius)
 
-  widget.setChecked(self.layoutWidget .. ".chkRestrictReceiving", root.getConfiguration("scc_proximity_restricted") or false)
+  self.widget.setChecked("chkRestrictReceiving", root.getConfiguration("scc_proximity_restricted") or false)
 end
 
 function proximitychat:cursorOverride(screenPosition)
-  if widget.active(self.layoutWidget) and (widget.inMember(self.layoutWidget .. ".sldProxRadius", screenPosition) 
-    or widget.inMember(self.layoutWidget .. ".lblProxRadiusValue", screenPosition) 
-    or widget.inMember(self.layoutWidget .. ".lblProxRadiusHint", screenPosition)) then
+  if widget.active(self.layoutWidget) and (self.widget.inMember("sldProxRadius", screenPosition) 
+    or self.widget.inMember("lblProxRadiusValue", screenPosition) 
+    or self.widget.inMember("lblProxRadiusHint", screenPosition)) then
     
     if player.id() and world.entityPosition(player.id()) then
       starcustomchat.utils.drawCircle(world.entityPosition(player.id()), self.proximityRadius, "green")
@@ -29,13 +29,13 @@ function proximitychat:cursorOverride(screenPosition)
 end
 
 function proximitychat:updateProxRadius(widgetName)
-  self.proximityRadius = widget.getSliderValue(self.layoutWidget .. "." .. widgetName) + 10
-  widget.setText(self.layoutWidget .. ".lblProxRadiusValue", self.proximityRadius)
+  self.proximityRadius = self.widget.getSliderValue("" .. widgetName) + 10
+  self.widget.setText("lblProxRadiusValue", self.proximityRadius)
   root.setConfiguration("scc_proximity_radius", self.proximityRadius)
   save()
 end
 
 function proximitychat:restrictReceiving()
-  root.setConfiguration("scc_proximity_restricted", widget.getChecked(self.layoutWidget .. ".chkRestrictReceiving"))
+  root.setConfiguration("scc_proximity_restricted", self.widget.getChecked("chkRestrictReceiving"))
   save()
 end

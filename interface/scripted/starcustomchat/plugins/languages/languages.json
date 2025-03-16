@@ -1,0 +1,207 @@
+{
+    "name": "Languages",
+  
+    "parameters": {
+      // Stagehand is required to retreive the languages the specific server supports
+      "stagehandType": ""
+    },
+
+    "guiAddons": {
+      "btnSelectRPLanguage": {
+        "type": "button",
+        "zlevel": 40,
+        "visible": false,
+        "position": [6, 40],
+        "base": "/interface/scripted/starcustomchat/plugins/languages/interface/languages.png",
+        "hover": "/interface/scripted/starcustomchat/plugins/languages/interface/languageshover.png",
+        "callback": "customButtonCallback",
+        "data": {
+          "displayText": "chat.buttons.language"
+        }
+      },
+
+      "lytSelectLanguage": {
+        "type": "layout",
+        "layoutType": "basic",
+        "visible": false,
+        "zlevel": 120,
+        "size": [90, 95],
+        "position": [25, 30],
+        "children": {
+          "background": {
+            "type": "image",
+            "file": "/interface/scripted/starcustomchat/plugins/languages/interface/background.png"
+          },
+          "saLanguages": {
+            "type": "scrollArea",
+            "position": [0, 0],
+            "size": [90, 85],
+            "children": {
+              "listChatLanguages": {
+                "type": "list",
+                "callback": "customButtonCallback",
+                "schema": {
+                  "selectedBG" : "/interface/scripted/starcustomchat/plugins/languages/interface/listitemselected.png",
+                  "unselectedBG" : "/interface/scripted/starcustomchat/plugins/languages/interface/listitem.png",
+                  "spacing" : [0, 1],
+                  "memberSize" : [90, 15],
+                  "listTemplate" : {
+                    "background" : {
+                      "type" : "image",
+                      "file" : "/interface/scripted/starcustomchat/plugins/languages/interface/listitem.png",
+                      "position" : [2, 0],
+                      "zlevel" : -1
+                    },
+                    "name" : {
+                      "type" : "label",
+                      "hAnchor": "mid",
+                      "vAnchor": "mid",
+                      "position": [45, 7],
+                      "wrapWidth": 80,
+                      "mouseTransparent": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+  
+    "settingsPage": {
+      "tabButtons": {
+        "baseImage": "/interface/scripted/starcustomchat/plugins/languages/settingstabs/tab.png",
+        "hoverImage": "/interface/scripted/starcustomchat/plugins/languages/settingstabs/tabhover.png",
+        "baseImageChecked": "/interface/scripted/starcustomchat/plugins/languages/settingstabs/tabselected.png",
+        "hoverImageChecked": "/interface/scripted/starcustomchat/plugins/languages/settingstabs/tabselectedhover.png"
+      },
+      "priority": 5,
+      "gui": {
+        "titleText": {
+          "type": "label",
+          "position": [12, 130],
+          "fontSize": 12,
+          "hAnchor": "left",
+          "value": "",
+          "translationKey": "settings.plugins.languages"
+        },
+
+        "lblWarningLanguagesDisabled": {
+          "type": "label",
+          "position": [120, 80],
+          "hAnchor": "mid",
+          "visible": false,
+          "wrapWidth": 170,
+          "color": "red",
+          "translationKey": "settings.plugins.languages.languages_disabled"
+        },
+
+        "lblWarningNoLanguagesSupport": {
+          "type": "label",
+          "position": [120, 80],
+          "hAnchor": "mid",
+          "visible": false,
+          "wrapWidth": 170,
+          "color": "red",
+          "translationKey": "settings.plugins.languages.no_languages_support"
+        },
+
+        "lblLanguageName": {
+          "type": "label",
+          "hAnchor": "mid",
+          "visible": false,
+          "fontSize": 12,
+          "value": "",
+          "position": [170, 120]
+        },
+        "lblDescription": {
+          "type": "label",
+          "hAnchor": "mid",
+          "visible": false,
+          "fontSize": 6,
+          "value": "",
+          "wrapWidth": 120,
+          "position": [170, 105]
+        },
+      
+
+
+        "lblDifficultyHint": {
+          "type": "label",
+          "visible": false,
+          "position": [180, 80],
+          "hAnchor": "right",
+          "translationKey": "settings.plugins.languages.difficulty"
+        },
+
+        "lblDifficultyValue": {
+          "type": "label",
+          "visible": false,
+          "position": [185, 80],
+          "hAnchor": "left"
+        },
+        
+        "lblKnowledgeHint": {
+          "type": "label",
+          "color": "gray",
+          "visible": false,
+          "position": [170, 60],
+          "hAnchor": "mid",
+          "translationKey": "settings.plugins.languages.knowledge"
+        },
+
+        "lblKnowledgePercent": {
+          "type": "label",
+          "visible": false,
+          "position": [178, 50],
+          "value": "",
+          "hAnchor": "right"
+        },
+
+        "spnKnowledge": {
+          "type": "spinner",
+          "visible": false,
+          "position" : [140, 50],
+          "upOffset" : 50,
+          "callback": "spnKnowledge"
+        },
+
+        "saLanguages": {
+          "type": "scrollArea",
+          "rect": [5, 35, 95, 130],
+          "visible": false,
+          "children": {
+            "listItems": {
+              "type": "list",
+              "callback": "selectLanguage",
+              "schema": {
+                "selectedBG" : "/interface/scripted/starcustomchat/plugins/languages/listselected.png",
+                "unselectedBG" : "/interface/scripted/starcustomchat/plugins/languages/listunselected.png",
+                "spacing" : [0, 1],
+                "memberSize" : [100, 15],
+                "listTemplate" : {
+                  "background" : {
+                    "type" : "image",
+                    "file" : "/interface/scripted/starcustomchat/plugins/languages/listunselected.png",
+                    "position" : [2, 0],
+                    "zlevel" : -1
+                  },
+                  "name" : {
+                    "type" : "label",
+                    "hAnchor": "mid",
+                    "vAnchor": "mid",
+                    "position": [50, 7],
+                    "wrapWidth": 50
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+  
+    "script": "/interface/scripted/starcustomchat/plugins/languages/languages.lua",
+    "settingsScript": "/interface/scripted/starcustomchat/plugins/languages/languagessettings.lua"
+  }

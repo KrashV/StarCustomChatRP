@@ -1,0 +1,14 @@
+{
+    "settings.plugins.languages": "RP Languages",
+    "settings.plugins.languages.no_languages_support": "RP languages are not supported on this server",
+    "settings.plugins.languages.languages_disabled": "RP languages are not enabled",
+    "settings.plugins.languages.knowledge": "Current knowledge",
+    "settings.plugins.languages.difficulty": "Difficulty:",
+    "settings.plugins.languages.difficulty_zero": "Common",
+    "chat.buttons.language": "Select Roleplay Language",
+    "chat.language.disabled": "^gray;No translation",
+    "tooltips.languages.name": "Language: %s",
+    "chat.alerts.languages.unknown": "^red;You don't know the %s language",
+    "chat.alerts.languages.selected": "The strings in \"Quotations\" will be sent in %s language",
+    "tooltips.languages.proficiency": "Proficiency: %s"
+}

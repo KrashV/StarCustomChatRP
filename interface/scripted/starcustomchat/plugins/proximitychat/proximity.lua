@@ -32,7 +32,7 @@ function proximitychat:onSendMessage(data)
     data.proximityRadius = self.proximityRadius
     
     if self.uniqueStagehandType and self.uniqueStagehandType ~= "" then
-      starcustomchat.utils.sendMessageToStagehand(self.uniqueStagehandType, "icc_sendMessage", data)
+      starcustomchat.utils.sendMessageToUniqueStagehand(self.uniqueStagehandType, "icc_sendMessage", data)
     elseif self.stagehandType and self.stagehandType ~= "" then
       starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "sendProxyMessage", data = data})
     else

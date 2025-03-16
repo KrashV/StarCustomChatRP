@@ -24,7 +24,7 @@
   ],
 
   "parameters": {
-    "stagehandType": "irdencustomchat",
+    "stagehandType": "",
     "highlightEditColor": "#886e447f",
     "trimLength": 40
   },

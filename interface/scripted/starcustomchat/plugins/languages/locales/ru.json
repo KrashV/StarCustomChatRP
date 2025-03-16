@@ -1,0 +1,14 @@
+{
+    "settings.plugins.languages": "RP Языки",
+    "settings.plugins.languages.no_languages_support": "Поддержка RP языков не поддерживается на данном сервере",
+    "settings.plugins.languages.languages_disabled": "Поддержка RP языков отключена",
+    "settings.plugins.languages.knowledge": "Текущий уровень",
+    "settings.plugins.languages.difficulty": "Сложность:",
+    "settings.plugins.languages.difficulty_zero": "Общий",
+    "chat.buttons.language": "Выбрать РП язык",
+    "chat.language.disabled": "^gray;Без перевода",
+    "tooltips.languages.name": "Язык: %s",
+    "chat.alerts.languages.unknown": "^red;Вы не знаете %s язык",
+    "chat.alerts.languages.selected": "Строки в \"Кавчках\" будут переведены на %s язык",
+    "tooltips.languages.proficiency": "Уровень языка: %s"
+}

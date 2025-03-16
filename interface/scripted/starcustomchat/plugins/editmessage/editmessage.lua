@@ -11,6 +11,8 @@ function editmessage:init(chat)
   if self.editingMessage then
     self.customChat:openSubMenu("edit", starcustomchat.utils.getTranslation("chat.editing.hint"), self:cropMessage(self.editingMessage.text))
   end
+
+  self.stagehandType = self.stagehandType ~= "" and self.stagehandType or nil
 end
 
 function editmessage:cropMessage(text)
@@ -61,13 +63,21 @@ end
 
 function editmessage:onTextboxEnter()
   if self.editingMessage then
-    starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "editMessage", data = {
+    local data = {
       text = widget.getText("tbxInput"),
       uuid = self.editingMessage.uuid,
       connection = self.editingMessage.connection,
       mode = self.editingMessage.mode,
       nickname = self.editingMessage.nickname
-    }})
+    }
+    if self.stagehandType then
+      starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "editMessage", data})
+    else
+      for _, pl in ipairs(world.playerQuery(world.entityPosition(player.id()), 100)) do 
+        world.sendEntityMessage(pl, "icc_message_edited", data)
+      end
+    end
+
     self.customChat:closeSubMenu()
     self.editingMessage = nil
     return true
