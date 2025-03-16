@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-permissions:
-  contents: write
 
 jobs:
   build:
@@ -24,8 +22,6 @@ jobs:
         run: echo "::set-output name=version::$(jq -r '.version' _metadata)"
 
       - name: 'Create GitHub Release'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         uses: softprops/action-gh-release@v1
         with:
           body_path: CHANGELOG.txt
@@ -43,5 +39,14 @@ jobs:
         uses: tsickert/discord-webhook@v6.0.0
         with:
           webhook-url: ${{ secrets.DELIVERY_DISCORD_URL }}
+          filename: StarCustomChatTranslate.pak  
+          content: "StarCustomChatTranslate V${{ steps.extract_version.outputs.version }}\n${{ steps.read_file.outputs.contents }}"
+
+      - name: Upload mod to Google Drive
+        uses: logickoder/google-drive-upload@main
+        with:
+          credentials: ${{ secrets.GCP_CREDENTIAL }}
           filename: StarCustomChatRP.pak  
-          content: "StarCustomChatRP V${{ steps.extract_version.outputs.version }}\n${{ steps.read_file.outputs.contents }}"
+          folderId: ${{ secrets.DRIVE_FOLDER_ID }}
+          overwrite: "true"
+        
