@@ -8,23 +8,49 @@ languages = PluginClass:new(
 function languages:init(chat)
   PluginClass.init(self, chat)
 
+  widget.setVisible("btnSelectRPLanguage", false)
   self.defaultLi = ""
   self.languagesLevels = player.getProperty("scc_rp_languages", {})
   self.serverLanguagesData = nil
 
   if self.stagehandType then
-    timers:add(1, function()
-      starcustomchat.utils.sendMessageToStagehand(self.stagehandType, "scc_retreive_languages", nil, function(data) 
-        self.serverLanguagesData = copy(data) 
-        if self.serverLanguagesData then
-          self:populateLanguageList()
-          widget.setVisible("btnSelectRPLanguage", true)
-        else
-          widget.setVisible("btnSelectRPLanguage", false)
-        end
-      end)
+    self.requestDataCoroutine = coroutine.wrap(function()
+      while not player.id() or not world.entityPosition(player.id()) do
+        coroutine.yield()
+      end
+
+      starcustomchat.utils.createStagehandWithData(self.stagehandType, {
+        message = "retrieveLanguages",
+        data = {
+          playerId = player.id()
+        }
+      })
+      self.requestDataCoroutine = nil
+      return true
     end)
   end
+end
+
+function languages:registerMessageHandlers()
+
+  starcustomchat.utils.setMessageHandler( "scc_rp_languages", function(_, _, serverLanguagesData)
+    if serverLanguagesData then
+      self.serverLanguagesData = serverLanguagesData
+      widget.setVisible("btnSelectRPLanguage", true)
+      self:populateLanguageList()
+    end
+  end)
+end
+
+function languages:update(dt)
+  if self.requestDataCoroutine then
+    self.requestDataCoroutine()
+  end
+  promises:update()
+end
+
+function languages:openSettings(settingsInterface)
+  settingsInterface.serverLanguagesData = self.serverLanguagesData
 end
 
 function languages:populateLanguageList()
@@ -75,7 +101,7 @@ function shuffleFunction(content, myLevel, difficulty, specialCharacters)
   end
 
   -- Calculate the "knowledge fraction" between myLevel and difficulty
-  local knowledgeFraction = myLevel / difficulty
+  local knowledgeFraction = math.min(myLevel / difficulty, 1)
 
   -- If myLevel is 0 and difficulty isn't 0, obfuscate the text
   if myLevel ~= difficulty then

@@ -36,9 +36,7 @@
   },
 
   "parameters": {
-    "stagehandType": "irdencustomchat",
-
-    
+        
     "defaultActionsColor": "575757",
     "defaultThoughtsColor": "A9468C",
 

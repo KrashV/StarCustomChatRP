@@ -3,7 +3,8 @@
   
     "parameters": {
       // Stagehand is required to retreive the languages the specific server supports
-      "stagehandType": ""
+      "stagehandType": "",
+      "timeoutBeforePolling": 5
     },
 
     "guiAddons": {

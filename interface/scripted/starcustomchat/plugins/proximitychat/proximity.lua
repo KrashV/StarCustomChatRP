@@ -42,7 +42,7 @@ function proximitychat:onSendMessage(data)
         if position then
           local players = world.playerQuery(position, data.proximityRadius)
           for _, pl in ipairs(players) do 
-            world.sendEntityMessage(pl, "icc_sendToUser", data)
+            world.sendEntityMessage(pl, "scc_add_message", data)
           end
           return true
         end

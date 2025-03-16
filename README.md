@@ -3,10 +3,7 @@
 This plugin for [StarCustomChat](https://github.com/KrashV/StarCustomChat) is dedicated to the roleplay aspects of the game. It consists of the following modules:
 
 ## Edit message
-You can edit the message using the context menu. The changes will only be seen for the players on the same players as you.
-
-> [!NOTE]
-> Without a server-specific patch to specify the stagehand that correctly handles the editing message, the edit will be only seen for the players around you.
+You can edit the message using the context menu. The changes will only be seen by the players on the same planet as you.
 
 ## Proximity chat
 You can specify the stagehand that would receive the message and then resend it to people around, or you can skip the stagehand and send the message around your character. 
@@ -17,6 +14,7 @@ You can specify the stagehand that would receive the message and then resend it 
 A simple tab that automatically adds double brackets around your message (( )). Also places the OOC messages in a separate channel which you can turn off.
 ![OOC chat showcase](https://i.imgur.com/AeTFO7a.png)
 
+
 ## RP Chat
 
 This plugin brings an ability to color the \*Actions* and %Thoughts% within messsages into custom, user-specific colors.
@@ -26,6 +24,7 @@ This plugin brings an ability to color the \*Actions* and %Thoughts% within mess
 Also, people with the Admin permissions can fire an Announcement message in your face, that will ignore all your filters and will have the scary red color.
 
 ![I came to make an announcement](https://i.imgur.com/PLWKb4a.png)
+
 *Now you can truly make an announcement about what exactly Shadow the Hedgehog did to your wife*
 
 ## RP Languages
@@ -40,22 +39,28 @@ You can specify the language your character will be speaking in "Quotation marks
 
 
 ### Stagehand example
-Here is the example of the simplies stagehand configuration. You can use it for both `Edit message` and `RP languages` plugin - just don't forget to create a separate, server-specifc mod with a path specifying the stagehand type. It should look like this:
 
 #### editmessage.json.patch
+
+Should be located at "/interface/scripted/starcustomchat/plugins/languages/languages.json.patch" and contain the following:
+
 ```diff
 [
-  { "op": "replace", "path": "/parameters/stagehandType", "value": "myserverchatstagehand"}
+  { "op": "replace", "path": "/parameters/stagehandType", "value": "STAGEHAND_NAME"}
 ]
 ```
 
 #### myserverchatstagehand.lua
-And here's the simple example of the stagehand script - you basically need to return a valid Json on a `scc_retreive_languages` entity message. Here we store the languages data in some file in the server mod.
+
+The code is very similar to the description in [StarCustomChat](https://github.com/KrashV/StarCustomChat?tab=readme-ov-file#stagehand-configuration):
+
 ```lua
 function init()
-  message.setHandler("scc_retreive_languages", function()
-    return root.assetJson("/your/path/to/the/languages/json/file")
-  end)
+  local purpose = config.getParameter("message")
+  local data = config.getParameter("data")
+  if purpose == "retrieveLanguages" then
+    sendToPlayer(data.playerId, root.assetJson("/your/path/to/the/languages/json/file"))
+  end
 end
 ```
 

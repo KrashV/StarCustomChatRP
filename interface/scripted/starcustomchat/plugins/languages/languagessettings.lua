@@ -1,5 +1,5 @@
 require "/interface/scripted/starcustomchatsettings/settingsplugin.lua"
-require "/scripts/messageutil.lua"
+require "/scripts/util.lua"
 
 languages = SettingsPluginClass:new(
   { name = "languages" }
@@ -9,35 +9,36 @@ function languages:init()
   self:_loadConfig()
 
   self.languagesLevels = player.getProperty("scc_rp_languages", {})
-  self.serverLanguagesData = nil
+  self.serverLanguagesData = config.getParameter("serverLanguagesData")
 
-  if self.stagehandType then
-    starcustomchat.utils.sendMessageToStagehand(self.stagehandType, "scc_retreive_languages", nil, function(languagesList) 
-      if languagesList then 
-        self:buildLanguagesList(languagesList) 
-      else
-        self.widget.setVisible("lblWarningNoLanguagesSupport", true)
-      end
-    end, function()
+  if self.stagehandType and self.stagehandType ~= "" then
+    if self.serverLanguagesData then
+      self:buildLanguagesList()
+    else
       self.widget.setVisible("lblWarningNoLanguagesSupport", true)
-    end)
+    end
   else
     self.widget.setVisible("lblWarningLanguagesDisabled", true)
   end
 end
 
-function languages:buildLanguagesList(languagesList)
-  self.widget.clearListItems("saLanguages.listItems")
-  self.serverLanguagesData = copy(languagesList)
-  self.widget.setVisible("saLanguages", true)
-  self.widget.clearListItems("saLanguages.listItems")
+function languages:isAvailable()
+  return config.getParameter("serverLanguagesData")
+end
 
-  for code, language in pairs(languagesList) do
-    local li = self.widget.addListItem("saLanguages.listItems")
-    self.widget.setText("saLanguages.listItems." .. li .. ".name", language.name)
-    self.widget.setData("saLanguages.listItems." .. li, code)
+function languages:buildLanguagesList()
+  self.widget.clearListItems("saLanguages.listItems")
+  if self.serverLanguagesData then
+    self.serverLanguagesData = copy(self.serverLanguagesData)
+    self.widget.setVisible("saLanguages", true)
+    self.widget.clearListItems("saLanguages.listItems")
+
+    for code, language in pairs(self.serverLanguagesData) do
+      local li = self.widget.addListItem("saLanguages.listItems")
+      self.widget.setText("saLanguages.listItems." .. li .. ".name", language.name)
+      self.widget.setData("saLanguages.listItems." .. li, code)
+    end
   end
-
 end
 
 function languages:getSelectedLanguageData()
@@ -93,7 +94,7 @@ function languages.spnKnowledge:up()
   local code = self:getSelectedLanguageData()
   if code then
     local currentKnowledge = self.languagesLevels[code] and self.languagesLevels[code].knowledge or 0
-    currentKnowledge = math.max(0, math.min(currentKnowledge + 1, self.serverLanguagesData[code].difficulty or 1))
+    currentKnowledge = util.clamp(currentKnowledge + 1, 0, 1)
     self.languagesLevels[code] = {
       knowledge = currentKnowledge
     }
@@ -107,7 +108,7 @@ function languages.spnKnowledge:down()
   local code = self:getSelectedLanguageData()
   if code then
     local currentKnowledge = self.languagesLevels[code] and self.languagesLevels[code].knowledge or 0
-    currentKnowledge = math.max(0, math.min(currentKnowledge - 1, self.serverLanguagesData[code].difficulty or 1))
+    currentKnowledge = util.clamp(currentKnowledge - 1, 0, 1)
     self.languagesLevels[code] = {
       knowledge = currentKnowledge
     }
@@ -115,8 +116,4 @@ function languages.spnKnowledge:down()
     self:printCurrentLevel(currentKnowledge, self.serverLanguagesData[code].difficulty)
     save()
   end
-end
-
-function languages:update(dt)
-  promises:update()
 end

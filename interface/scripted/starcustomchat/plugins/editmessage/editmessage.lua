@@ -26,7 +26,7 @@ function editmessage:onLocaleChange()
 end
 
 function editmessage:registerMessageHandlers()
-  starcustomchat.utils.setMessageHandler("icc_message_edited", function(_, _, data)
+  starcustomchat.utils.setMessageHandler("scc_edit_message", function(_, _, data)
     local msgInd = self.customChat:findMessageByUUID(data.uuid)
     if msgInd then
       data = self.customChat.callbackPlugins("formatIncomingMessage", data)
@@ -74,7 +74,7 @@ function editmessage:onTextboxEnter()
       starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "editMessage", data = data})
     else
       for _, pl in ipairs(world.playerQuery(world.entityPosition(player.id()), 100)) do 
-        world.sendEntityMessage(pl, "icc_message_edited", data)
+        world.sendEntityMessage(pl, "scc_edit_message", data)
       end
     end
 
