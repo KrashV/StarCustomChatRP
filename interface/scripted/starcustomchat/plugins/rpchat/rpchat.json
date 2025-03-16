@@ -49,20 +49,5 @@
     }
   },
 
-  "localeKeys": {
-    "chat.modes.Announcement": {
-      "ru": "Важное",
-      "en": "Announcement"
-    },
-    "settings.colors.actionstext": {
-      "ru": "*Действия*",
-      "en": "*Actions*"
-    },
-    "settings.colors.thoughtstext": {
-      "ru": "%Мысли%",
-      "en": "%Thoughts%"
-    }
-  },
-
   "script": "/interface/scripted/starcustomchat/plugins/rpchat/rpchat.lua"
 }
