@@ -9,6 +9,6 @@
     "chat.language.disabled": "^gray;Без перевода",
     "tooltips.languages.name": "Язык: %s",
     "chat.alerts.languages.unknown": "^red;Вы не знаете %s язык",
-    "chat.alerts.languages.selected": "Строки в \"Кавчках\" будут переведены на %s язык",
+    "chat.alerts.languages.selected": "Строки в \"Кавычках\" будут переведены на %s язык",
     "tooltips.languages.proficiency": "Уровень языка: %s"
 }
