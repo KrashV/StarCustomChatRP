@@ -94,7 +94,12 @@ end
 
 function editmessage:contextMenuButtonFilter(buttonName, screenPosition, selectedMessage)
   if selectedMessage and buttonName == "edit" and not selectedMessage.image then
-    return selectedMessage and selectedMessage.connection * -65536 == player.id() and selectedMessage.uuid and selectedMessage.mode ~= "CommandResult" 
+    -- FezzedOne: Allows edits to work on xStarbound clients after swapping players.
+    local playerId = player.id()
+    local clientMatchesPlayer = playerId >= selectedMessage.connection * -65536 and playerId < (selectedMessage.connection - 1) * -65536
+    return selectedMessage and clientMatchesPlayer
+      and selectedMessage.uuid
+      and selectedMessage.mode ~= "CommandResult"
   end
 end
 
