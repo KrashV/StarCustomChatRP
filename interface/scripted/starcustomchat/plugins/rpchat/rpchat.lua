@@ -12,8 +12,9 @@ function rpchat:onSendMessage(data)
 end
 
 function rpchat:formatIncomingMessage(message)
-
-  if string.find(message.text, "^" .. self.announcementPrefix) then
+  -- FezzedOne: Escape all special Lua regex characters in the announcement prefix, since string.find takes a pattern argument.
+  local announcementPrefixPattern = self.announcementPrefix:gsub("[%(%)%.%%%+%-%*%?%[%^%$]", function(s) return "%" .. s end)
+  if string.find(message.text, "^" .. announcementPrefixPattern) then
     message.mode = "Announcement"
     message.text = string.sub(message.text, string.len(self.announcementPrefix) + 1)
     message.portrait = message.portrait and message.portrait ~= '' and message.portrait or self.modeIcons.server
