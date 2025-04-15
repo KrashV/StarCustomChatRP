@@ -1,2 +1,2 @@
-- Fixed the languages not pulling up when the load is too long
-- Aligned the code to StarCustomChat v1.9.2
+- Fixed the language learning when the difficulty != 1
+- Fixed the language description not displaying correctly
