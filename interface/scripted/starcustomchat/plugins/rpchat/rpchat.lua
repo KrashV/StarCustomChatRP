@@ -13,7 +13,7 @@ end
 
 function rpchat:formatIncomingMessage(message)
 
-  if string.find(message.text, "^" .. self.announcementPrefix) then
+  if string.find(message.text, "^" .. self.announcementPrefix, 1, true) then
     message.mode = "Announcement"
     message.text = string.sub(message.text, string.len(self.announcementPrefix) + 1)
     message.portrait = message.portrait and message.portrait ~= '' and message.portrait or self.modeIcons.server

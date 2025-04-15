@@ -1,2 +1,1 @@
-- Fixed the language learning when the difficulty != 1
-- Fixed the language description not displaying correctly
+- Use plain search of the annotation prefix.
