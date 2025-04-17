@@ -228,6 +228,7 @@ end
 
 function languages:onSettingsUpdate(data)
   self.languagesLevels = player.getProperty("scc_rp_languages", {})
+  self:populateLanguageList()
 end
 
 function languages:onCustomButtonClick(btnName, data)
