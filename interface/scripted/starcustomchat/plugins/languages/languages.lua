@@ -60,6 +60,8 @@ function languages:populateLanguageList()
   widget.setText("lytSelectLanguage.saLanguages.listChatLanguages." .. self.defaultLi .. ".name", starcustomchat.utils.getTranslation("chat.language.disabled"))
   widget.setListSelected("lytSelectLanguage.saLanguages.listChatLanguages", self.defaultLi)
 
+  -- FezzedOne: Added nil check to prevent a crash.
+  if not self.serverLanguagesData then return end
   for code, langConfig in pairs(self.serverLanguagesData) do 
     local li = widget.addListItem("lytSelectLanguage.saLanguages.listChatLanguages")
 
