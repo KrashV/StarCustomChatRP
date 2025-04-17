@@ -26,30 +26,30 @@ function printTime()
   return hour..":"..minute
 end
 
-function proximitychat:onSendMessage(data)
-  if data.mode == "Proximity" then
-    data.time = printTime()
+function proximitychat:onSendMessage(message)
+  if message.mode == "Proximity" then
+    message.time = printTime()
     -- FezzedOne: Add a sender ID to proximity messages because xStarbound clients can control
     -- multiple players. Good practice to do it for all senders anyway.
-    data.senderId = player.id()
-    data.proximityRadius = self.proximityRadius
+    message.senderId = player.id()
+    message.proximityRadius = self.proximityRadius
     
     if self.uniqueStagehandType and self.uniqueStagehandType ~= "" then
-      starcustomchat.utils.sendMessageToUniqueStagehand(self.uniqueStagehandType, "icc_sendMessage", data)
+      starcustomchat.utils.sendMessageToUniqueStagehand(self.uniqueStagehandType, "icc_sendMessage", message)
     elseif self.stagehandType and self.stagehandType ~= "" then
-      starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "sendProxyMessage", data = data})
+      starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "sendProxyMessage", data = message})
     else
       
       local function sendMessageToPlayers()
         local position = player.id() and world.entityPosition(player.id())
         if position then
-          local players = world.playerQuery(position, data.proximityRadius)
+          local players = world.playerQuery(position, message.proximityRadius)
           for _, pl in ipairs(players) do 
             -- FezzedOne: Also add a receiver ID to proximity messages. This is currently used for
             -- receiver tags on xStarbound and must be done by the sender, no matter the client,
             -- so that receiving xStarbound clients can disambiguate.
-            data.receiverId = pl
-            world.sendEntityMessage(pl, "scc_add_message", data)
+            message.receiverId = pl
+            world.sendEntityMessage(pl, "scc_add_message", message)
           end
           return true
         end
@@ -63,7 +63,9 @@ function proximitychat:onSendMessage(data)
       promises:add(sendMessagePromise)
     end
 
-    player.say(data.text)
+    if not message.outloud then
+      player.say(message.text)
+    end
   end
 end
 

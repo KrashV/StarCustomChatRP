@@ -218,16 +218,21 @@ end
 
 function languages:formatOutcomingMessage(message)
   if self.serverLanguagesData and self.selectedLanguage and message.text then
+    local originalText = message.text
 
     message.text = message.text:gsub('%b""', function(quoted)
       return '"^clear;' .. self.selectedLanguage .. "^reset;" .. quoted:sub(2)
     end)
+
+    message.silent = true
+    player.say(originalText)
   end
   return message
 end
 
 function languages:onSettingsUpdate(data)
   self.languagesLevels = player.getProperty("scc_rp_languages", {})
+  self:populateLanguageList()
 end
 
 function languages:onCustomButtonClick(btnName, data)

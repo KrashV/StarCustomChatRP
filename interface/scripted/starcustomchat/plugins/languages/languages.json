@@ -119,11 +119,12 @@
         "lblDescription": {
           "type": "label",
           "hAnchor": "mid",
+          "vAnchor": "top",
           "visible": false,
           "fontSize": 6,
           "value": "",
           "wrapWidth": 120,
-          "position": [170, 105]
+          "position": [170, 115]
         },
       
 

@@ -94,7 +94,7 @@ function languages.spnKnowledge:up()
   local code = self:getSelectedLanguageData()
   if code then
     local currentKnowledge = self.languagesLevels[code] and self.languagesLevels[code].knowledge or 0
-    currentKnowledge = util.clamp(currentKnowledge + 1, 0, 1)
+    currentKnowledge = util.clamp(currentKnowledge + 1, 0, self.serverLanguagesData[code].difficulty or 1)
     self.languagesLevels[code] = {
       knowledge = currentKnowledge
     }
@@ -108,7 +108,7 @@ function languages.spnKnowledge:down()
   local code = self:getSelectedLanguageData()
   if code then
     local currentKnowledge = self.languagesLevels[code] and self.languagesLevels[code].knowledge or 0
-    currentKnowledge = util.clamp(currentKnowledge - 1, 0, 1)
+    currentKnowledge = util.clamp(currentKnowledge - 1, 0, self.serverLanguagesData[code].difficulty or 1)
     self.languagesLevels[code] = {
       knowledge = currentKnowledge
     }

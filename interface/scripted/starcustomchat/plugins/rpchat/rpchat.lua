@@ -4,16 +4,18 @@ rpchat = PluginClass:new(
   { name = "rpchat" }
 )
 
-function rpchat:onSendMessage(data)
-  if data.mode == "Announcement" then
-    data.text = self.announcementPrefix .. data.text
-    chat.send(data.text, "Broadcast")
+function rpchat:onSendMessage(message)
+  if message.mode == "Announcement" then
+    local originalText = message.text
+    message.text = self.announcementPrefix .. originalText
+    chat.send(message.text, "Broadcast", true, message.data)
+    player.say(originalText)
   end
 end
 
 function rpchat:formatIncomingMessage(message)
 
-  if string.find(message.text, "^" .. self.announcementPrefix) then
+  if string.find(message.text, self.announcementPrefix, 1, true) then
     message.mode = "Announcement"
     message.text = string.sub(message.text, string.len(self.announcementPrefix) + 1)
     message.portrait = message.portrait and message.portrait ~= '' and message.portrait or self.modeIcons.server
