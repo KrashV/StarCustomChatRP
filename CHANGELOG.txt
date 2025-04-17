@@ -1,2 +1,4 @@
 - Annoncement: Use plain search of the annotation prefix.
 - Languages: fixed the display of values not changing in time.
+
+Requires StarCustomChat 1.9.4!

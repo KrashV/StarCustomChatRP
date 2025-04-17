@@ -26,23 +26,23 @@ function printTime()
   return hour..":"..minute
 end
 
-function proximitychat:onSendMessage(data)
-  if data.mode == "Proximity" then
-    data.time = printTime()
-    data.proximityRadius = self.proximityRadius
+function proximitychat:onSendMessage(message)
+  if message.mode == "Proximity" then
+    message.time = printTime()
+    message.proximityRadius = self.proximityRadius
     
     if self.uniqueStagehandType and self.uniqueStagehandType ~= "" then
-      starcustomchat.utils.sendMessageToUniqueStagehand(self.uniqueStagehandType, "icc_sendMessage", data)
+      starcustomchat.utils.sendMessageToUniqueStagehand(self.uniqueStagehandType, "icc_sendMessage", message)
     elseif self.stagehandType and self.stagehandType ~= "" then
-      starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "sendProxyMessage", data = data})
+      starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "sendProxyMessage", data = message})
     else
       
       local function sendMessageToPlayers()
         local position = player.id() and world.entityPosition(player.id())
         if position then
-          local players = world.playerQuery(position, data.proximityRadius)
+          local players = world.playerQuery(position, message.proximityRadius)
           for _, pl in ipairs(players) do 
-            world.sendEntityMessage(pl, "scc_add_message", data)
+            world.sendEntityMessage(pl, "scc_add_message", message)
           end
           return true
         end
@@ -56,7 +56,9 @@ function proximitychat:onSendMessage(data)
       promises:add(sendMessagePromise)
     end
 
-    player.say(data.text)
+    if not message.outloud then
+      player.say(message.text)
+    end
   end
 end
 
