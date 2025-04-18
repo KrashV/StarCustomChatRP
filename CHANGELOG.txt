@@ -1,4 +1,1 @@
-- Annoncement: Use plain search of the annotation prefix.
-- Languages: fixed the display of values not changing in time.
-
-Requires StarCustomChat 1.9.4!
+- Fixed the language plugin crashing the mod on opening the settings
