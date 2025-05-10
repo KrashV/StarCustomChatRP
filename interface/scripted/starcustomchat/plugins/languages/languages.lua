@@ -73,8 +73,7 @@ function languages:populateLanguageList()
 
     local data = {
       code = code,
-      displayText = "tooltips.languages.proficiency",
-      displayParams = string.format("%.0f%%", percProf)
+      displayPlainText = (langConfig.description and langConfig.description .. " " or "") .. starcustomchat.utils.getTranslation("tooltips.languages.proficiency", string.format("%.0f%%", percProf))
     }
     
     widget.setText("lytSelectLanguage.saLanguages.listChatLanguages." .. li .. ".name", langConfig.name)
@@ -193,7 +192,7 @@ function languages:formatIncomingMessage(message)
     message.text = message.text:gsub('%b""', function(quoted)
       local content = quoted:sub(2, -2)
       for code, language in pairs(self.serverLanguagesData) do 
-        if content:find("%^clear;" .. code .. "%^reset;") then
+        if content:find("^clear;" .. code .. "^reset;", nil, true) then
           content = content:sub(string.len("^clear;" .. code .. "^reset;") + 1)
           math.randomseed(message.uuid)
           content = shuffleFunction(content, self.languagesLevels[code] and self.languagesLevels[code].knowledge, language.difficulty or 1, language.specialCharacters)
