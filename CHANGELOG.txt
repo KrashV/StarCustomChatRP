@@ -1,1 +1,3 @@
-- Fixed the language plugin crashing the mod on opening the settings
+- Actions and Thoughts can now be assigned with a custom font
+
+Requires SCC 1.10.0+
