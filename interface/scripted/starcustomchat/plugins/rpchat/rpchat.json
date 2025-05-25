@@ -23,8 +23,21 @@
           "default": "A9468C"
         }
       ]
+    },
+    "fonts": {
+      "items": [
+        {
+          "name": "actionstext",
+          "label": "settings.fonts.actionstext"
+        },
+        {
+          "name": "thoughtstext",
+          "label": "settings.fonts.thoughtstext"
+        }
+      ]
     }
   },
+  
 
   "baseConfigValues": {
     "modeColors": {

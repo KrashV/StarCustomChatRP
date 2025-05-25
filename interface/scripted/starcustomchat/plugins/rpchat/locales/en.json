@@ -1,5 +1,7 @@
 {
     "chat.modes.Announcement": "Announcement",
     "settings.colors.actionstext": "*Actions*",
-    "settings.colors.thoughtstext": "%Thoughts%"
+    "settings.colors.thoughtstext": "%Thoughts%",
+    "settings.fonts.actionstext": "*Actions*",
+    "settings.fonts.thoughtstext": "%Thoughts%"
 }
