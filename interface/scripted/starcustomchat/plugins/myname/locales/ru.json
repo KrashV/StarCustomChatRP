@@ -5,7 +5,6 @@
     "settings.plugins.myname.ping_enabled": "Включить пинг",
     "settings.plugins.myname.add_new_name": "+ Добавить новое имя",
     "settings.plugins.myname.remove_name": "Убрать имя",
-    "settings.plugins.myname.cant_remove_own_name": "Нельзя убрать имя персонажа",
     "settings.plugins.myname.background_enabled": "Покрас фона",
     "settings.plugins.myname.name_used": "%s вас упомянул",
     "settings.colors.myname.background": "Сообщения с именем"

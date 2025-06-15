@@ -33,6 +33,7 @@ function myname:populateScrollArea()
   local li = self.widget.addListItem("saScrollArea.listItems")
   self.widget.setText("saScrollArea.listItems." .. li .. ".name", player.name())
   self.widget.setButtonEnabled("saScrollArea.listItems." .. li .. ".btnRemove", false)
+  self.widget.removeChild("saScrollArea.listItems." .. li, "btnRemove")
 
   for _, name in ipairs(self.myNameList) do
     local li = self.widget.addListItem("saScrollArea.listItems")
@@ -76,6 +77,7 @@ function myname:addNewName()
 
   table.insert(self.myNameList, name)
   player.setProperty("scc_myname_list", self.myNameList)
+  self.widget.blur("tbxAddNewName")
 end
 
 function myname:toggleMyNameEnabled()
