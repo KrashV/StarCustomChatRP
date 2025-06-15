@@ -23,5 +23,10 @@
         "op": "add",
         "path": "/-",
         "value": "languages"
+    },
+    {
+        "op": "add",
+        "path": "/-",
+        "value": "myname"
     }
   ]

@@ -1,0 +1,12 @@
+{
+    "settings.plugins.myname": "My name",
+    "settings.colors.myname": "My name",
+    "settings.plugins.myname.coloring_enabled": "Name Coloring",
+    "settings.plugins.myname.ping_enabled": "Ping",
+    "settings.plugins.myname.add_new_name": "+ Add a new name",
+    "settings.plugins.myname.remove_name": "Remove name",
+    "settings.plugins.myname.cant_remove_own_name": "Cannot remove the character name",
+    "settings.plugins.myname.background_enabled": "Background coloring",
+    "settings.plugins.myname.name_used": "%s mentioned you",
+    "settings.colors.myname.background": "My name background"
+}

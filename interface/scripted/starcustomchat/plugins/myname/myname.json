@@ -1,0 +1,166 @@
+{
+  "name": "My name",
+
+  "settingsPluginAddons": {
+    "colors": {
+      "items": [
+        {
+          "name": "myname",
+          "label": "settings.colors.myname",
+          "default": "4435e1"
+        },
+        {
+          "name": "mynamebackground",
+          "label": "settings.colors.myname.background",
+          "default": "df9f0045"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "pingSound": "/sfx/instruments/bones/a4.ogg"
+  },
+
+  "settingsPage": {
+    "tabButtons": {
+      "baseImage": "/interface/scripted/starcustomchat/plugins/myname/settingstabs/myname.png:base",
+      "hoverImage": "/interface/scripted/starcustomchat/plugins/myname/settingstabs/myname.png:hover",
+      "baseImageChecked": "/interface/scripted/starcustomchat/plugins/myname/settingstabs/myname.png:selected",
+      "hoverImageChecked": "/interface/scripted/starcustomchat/plugins/myname/settingstabs/myname.png:selectedhover"
+    },
+    "gui": {
+      "titleText": {
+        "type": "label",
+        "position": [12, 130],
+        "fontSize": 12,
+        "hAnchor": "left",
+        "value": "",
+        "translationKey": "settings.plugins.myname"
+      },
+      "saScrollArea": {
+        "type": "scrollArea",
+        "rect": [5, 35, 85, 130],
+        "children": {
+          "listItems": {
+            "type": "list",
+            "callback": "null",
+            "schema": {
+              "selectedBG" : "/interface/scripted/starcustomchat/plugins/myname/listunselected.png",
+              "unselectedBG" : "/interface/scripted/starcustomchat/plugins/myname/listunselected.png",
+              "spacing" : [0, 1],
+              "memberSize" : [75, 15],
+              "listTemplate" : {
+                "background" : {
+                  "type" : "image",
+                  "file" : "/interface/scripted/starcustomchat/plugins/myname/listunselected.png",
+                  "position" : [2, 0],
+                  "zlevel" : -1
+                },
+                "name" : {
+                  "type" : "label",
+                  "hAnchor": "mid",
+                  "vAnchor": "mid",
+                  "position": [37, 7],
+                  "wrapWidth": 50
+                },
+                "btnRemove": {
+                  "type": "button",
+                  "position": [60, 3],
+                  "base": "/interface/scripted/starcustomchat/plugins/myname/buttons/remove.png:base",
+                  "hover": "/interface/scripted/starcustomchat/plugins/myname/buttons/remove.png:hover",
+                  "callback": "removeName",
+                  "data": {
+                    "displayText": "settings.plugins.myname.cant_remove_own_name"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
+      "lblColoringEnabled": {
+        "type": "label",
+        "position": [170, 120],
+        "hAnchor": "right",
+        "color": "lightgray",
+        "translationKey": "settings.plugins.myname.coloring_enabled"
+      },
+
+      "chkColoringEnabled": {
+        "type": "button",
+        "checkable": true,
+        "checked": false,
+        "base": "/interface/crafting/checkboxnocheck.png",
+        "hover": "/interface/crafting/checkboxnocheck.png",
+        "baseImageChecked": "/interface/crafting/checkboxcheck.png",
+        "hoverImageChecked": "/interface/crafting/checkboxcheck.png",
+        "position": [180, 120],
+        "hAnchor": "left",
+        "vAnchor": "mid",
+        "value": false,
+        "callback": "toggleMyNameEnabled"
+      },
+
+      "lblPingEnabled": {
+        "type": "label",
+        "position": [170, 100],
+        "hAnchor": "right",
+        "color": "lightgray",
+        "translationKey": "settings.plugins.myname.ping_enabled"
+      },
+
+      "chkPingEnabled": {
+        "type": "button",
+        "checkable": true,
+        "checked": false,
+        "base": "/interface/crafting/checkboxnocheck.png",
+        "hover": "/interface/crafting/checkboxnocheck.png",
+        "baseImageChecked": "/interface/crafting/checkboxcheck.png",
+        "hoverImageChecked": "/interface/crafting/checkboxcheck.png",
+        "position": [180, 100],
+        "hAnchor": "left",
+        "vAnchor": "mid",
+        "value": false,
+        "callback": "togglePingEnabled"
+      },
+
+      "lblBackgroundEnabled": {
+        "type": "label",
+        "position": [170, 80],
+        "hAnchor": "right",
+        "color": "lightgray",
+        "translationKey": "settings.plugins.myname.background_enabled"
+      },
+
+      "chkBackgroundEnabled": {
+        "type": "button",
+        "checkable": true,
+        "checked": false,
+        "base": "/interface/crafting/checkboxnocheck.png",
+        "hover": "/interface/crafting/checkboxnocheck.png",
+        "baseImageChecked": "/interface/crafting/checkboxcheck.png",
+        "hoverImageChecked": "/interface/crafting/checkboxcheck.png",
+        "position": [180, 80],
+        "hAnchor": "left",
+        "vAnchor": "mid",
+        "value": false,
+        "callback": "toggleBackgroundEnabled"
+      },
+
+      "tbxAddNewName": {
+        "type": "textbox",
+        "position": [90, 40],
+        "hAnchor": "left",
+        "vAnchor": "mid",
+        "callback": "null",
+        "width": 100,
+        "hintTranslationKey": "settings.plugins.myname.add_new_name",
+        "enterKey": "addNewName"
+      }
+    }
+  },
+
+  "script": "/interface/scripted/starcustomchat/plugins/myname/myname.lua",
+  "settingsScript": "/interface/scripted/starcustomchat/plugins/myname/mynamesettings.lua"
+}
