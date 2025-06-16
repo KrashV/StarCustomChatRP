@@ -4,12 +4,6 @@ oocchat = PluginClass:new(
   { name = "oocchat" }
 )
 
-function oocchat:init()
-  self:_loadConfig()
-  local colors = root.getConfiguration("scc_custom_colors") or {}
-  self.OOCcolor = colors["occtext"] or self.defaultColor
-end
-
 function oocchat:formatIncomingMessage(message)
   if message.text:find("^%s*%(%(") and (message.text:find("^%s*%(%b()%)%s*$") or not message.text:find("%)%)")) then
     if message.mode == "Broadcast" or message.mode == "Local" then
@@ -18,8 +12,8 @@ function oocchat:formatIncomingMessage(message)
   end
 
   if message.text:find("%(%(") then
-    message.text = string.gsub(message.text, "%(%(.-%)%)", "^#" .. self.OOCcolor .. ";%1^reset;")
-    message.text = string.gsub(message.text, "(.*)%(%((.-)$", "%1^#" .. self.OOCcolor .. ";((%2")
+    message.text = string.gsub(message.text, "%(%(.-%)%)", "^" .. self.customChat:getColor("occtext") .. ";%1^reset;")
+    message.text = string.gsub(message.text, "(.*)%(%((.-)$", "%1^" .. self.customChat:getColor("occtext") .. ";((%2")
   end
   return message
 end
