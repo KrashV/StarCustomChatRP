@@ -1,3 +1,1 @@
-- My Name plugin that allows to ping you, highlight your name/aliases in the messages when received.
-
-Requires SCC 1.11.1+
+- Edit plugin additions
