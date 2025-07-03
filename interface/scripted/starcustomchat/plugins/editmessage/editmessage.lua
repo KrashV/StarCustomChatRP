@@ -35,9 +35,9 @@ function editmessage:registerMessageHandlers()
       message.mode = data.mode
       message.textHeight = nil
       if not message.edited then
-        message.time = "^lightgray;(" .. starcustomchat.utils.getTranslation("chat.message.edited") .. ")^reset; "
+        message.time = "^set;^lightgray;(" .. starcustomchat.utils.getTranslation("chat.message.edited") .. ")^reset; "
           .. (message.time or "")
-          message.edited = true
+        message.edited = true
       end
 
       local newUUID = util.hashString(data.connection .. data.text)
