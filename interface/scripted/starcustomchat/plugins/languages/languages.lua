@@ -13,7 +13,7 @@ function languages:init(chat)
   self.languagesLevels = player.getProperty("scc_rp_languages", {})
   self.serverLanguagesData = nil
 
-  if self.stagehandType then
+  if self.stagehandType and self.stagehandType ~= "" then
     self.requestDataCoroutine = coroutine.wrap(function()
       while not player.id() or not world.entityPosition(player.id()) do
         coroutine.yield()
@@ -60,6 +60,8 @@ function languages:populateLanguageList()
   widget.setText("lytSelectLanguage.saLanguages.listChatLanguages." .. self.defaultLi .. ".name", starcustomchat.utils.getTranslation("chat.language.disabled"))
   widget.setListSelected("lytSelectLanguage.saLanguages.listChatLanguages", self.defaultLi)
 
+  -- FezzedOne: Added nil check to prevent a crash.
+  if not self.serverLanguagesData then return end
   for code, langConfig in pairs(self.serverLanguagesData) do 
     local li = widget.addListItem("lytSelectLanguage.saLanguages.listChatLanguages")
 
