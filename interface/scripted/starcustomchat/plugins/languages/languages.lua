@@ -13,7 +13,7 @@ function languages:init(chat)
   self.languagesLevels = player.getProperty("scc_rp_languages", {})
   self.serverLanguagesData = nil
 
-  if self.stagehandType then
+  if self.stagehandType and self.stagehandType ~= "" then
     self.requestDataCoroutine = coroutine.wrap(function()
       while not player.id() or not world.entityPosition(player.id()) do
         coroutine.yield()

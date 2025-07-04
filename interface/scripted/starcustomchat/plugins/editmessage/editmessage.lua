@@ -70,7 +70,7 @@ function editmessage:onTextboxEnter()
       mode = self.editingMessage.mode,
       nickname = self.editingMessage.nickname
     }
-    if self.stagehandType then
+    if self.stagehandType and self.stagehandType ~= "" then
       starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "editMessage", data = data})
     else
       for _, pl in ipairs(world.playerQuery(world.entityPosition(player.id()), 100)) do 
