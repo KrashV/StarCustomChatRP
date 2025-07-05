@@ -42,7 +42,7 @@ function myname:update(dt)
 end
 
 function myname:formatIncomingMessage(message)
-  if not message.nickname or message.nickname == player.name() or message.connection == 0 then
+  if not message.nickname  then
     return message
   end
 
@@ -60,7 +60,7 @@ function myname:formatIncomingMessage(message)
     end
   else
     local handled = false
-    message.text = message.text:gsub('%w+', function(word)
+    message.text = message.text:gsub("[^%s%p]+", function(word)
       for _, name in ipairs(self.myNameList) do
         if word:lower() == name:lower() then
           if not handled then

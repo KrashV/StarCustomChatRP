@@ -1,1 +1,2 @@
 - Languages: Fixed up warning logging
+- MyName: better splitting words for non-English languages
