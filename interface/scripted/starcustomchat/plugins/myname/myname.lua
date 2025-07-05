@@ -42,7 +42,7 @@ function myname:update(dt)
 end
 
 function myname:formatIncomingMessage(message)
-  if not message.nickname  then
+  if not message.nickname or message.nickname == player.name() or message.connection == 0 then
     return message
   end
 
