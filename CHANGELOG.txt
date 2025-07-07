@@ -1,1 +1,2 @@
-- Hotfix for coloring your own names
+## Localisation Support
+Spanish
