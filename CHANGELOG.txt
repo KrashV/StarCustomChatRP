@@ -1,1 +1,1 @@
-- MyName: do not color your name when it's coming from the server.
+- Hotfix for coloring your own names

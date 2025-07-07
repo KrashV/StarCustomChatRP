@@ -1,4 +1,5 @@
 {
     "chat.commands.edit": "Редактировать",
-    "chat.editing.hint": "Редактирование: "
+    "chat.editing.hint": "Редактирование: ",
+    "chat.message.edited": "изменено"
 }
