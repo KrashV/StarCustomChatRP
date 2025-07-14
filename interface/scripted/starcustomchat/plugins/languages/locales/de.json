@@ -1,0 +1,14 @@
+{
+    "settings.plugins.languages": "RP-Sprachen",
+    "settings.plugins.languages.no_languages_support": "RP-Sprachen werden von diesem Server nicht unterstützt",
+    "settings.plugins.languages.languages_disabled": "RP-Sprachen sind nicht aktiviert",
+    "settings.plugins.languages.knowledge": "Wissensstand",
+    "settings.plugins.languages.difficulty": "Schwierigkeit:",
+    "settings.plugins.languages.difficulty_zero": "Common",
+    "chat.buttons.language": "RP-Sprache auswählen",
+    "chat.language.disabled": "^gray;Keine Übersetzung",
+    "tooltips.languages.name": "Sprache: %s",
+    "chat.alerts.languages.unknown": "^red;Du kennst die Sprache %s nicht",
+    "chat.alerts.languages.selected": "Der Text in \"Anführungszeichen\" wird in der Sprache %s versendet",
+    "tooltips.languages.proficiency": "Wissensstand: %s"
+}

@@ -1,0 +1,6 @@
+{
+    "chat.modes.Proximity": "Proximity",
+    "settings.proximity.radius": "Proximity-Radius",
+    "settings.plugins.proximitychat": "Proximity-Chat",
+    "settings.proximity.restrict_description": "Erhält nur die Nachrichten von Spielern im angegebenen Radius"
+}
