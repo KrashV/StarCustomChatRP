@@ -98,15 +98,11 @@ function editmessage:contextMenuButtonFilter(buttonName, screenPosition, selecte
   end
 end
 
-function clearMetatags(text)
-  return text:gsub("%^.-;", "")
-end
-
 function editmessage:contextMenuButtonClick(buttonName, selectedMessage)
   if selectedMessage and buttonName == "edit" then
     self.editingMessage = selectedMessage
 
-    local cleartext = clearMetatags(selectedMessage.text)
+    local cleartext = starcustomchat.utils.clearMetatags(selectedMessage.text)
     self.customChat:openSubMenu("edit", starcustomchat.utils.getTranslation("chat.editing.hint"), self:cropMessage(cleartext))
     widget.focus("tbxInput")
     widget.setText("tbxInput", cleartext)
