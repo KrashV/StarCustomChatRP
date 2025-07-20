@@ -10,25 +10,8 @@ function proximitychat:init()
   self.receivingRestricted = root.getConfiguration("scc_proximity_restricted") or false
 end
 
-function planetTime()
-  local n = world.timeOfDay()
-  local t = n * 24 * 3600
-  local hours = t / 3600
-  local minutes = (t / 60) % 60
-  return (hours + 6) % 24, minutes
-end
-
-function printTime()
-  hour, minute = planetTime()
-	hour = string.format("%02d", math.floor(hour))
-	minute = string.format("%02d", math.floor(minute))
-  
-  return hour..":"..minute
-end
-
 function proximitychat:onSendMessage(message)
   if message.mode == "Proximity" then
-    message.time = printTime()
     message.proximityRadius = self.proximityRadius
     
     if self.uniqueStagehandType and self.uniqueStagehandType ~= "" then
