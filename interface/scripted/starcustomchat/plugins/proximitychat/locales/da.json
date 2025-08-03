@@ -1,0 +1,6 @@
+{
+    "chat.modes.Proximity": "Nabij",
+    "settings.proximity.radius": "Straal van nabijheid",
+    "settings.plugins.proximitychat": "Nabije chat",
+    "settings.proximity.restrict_description": "Ontvang enkel nabije berichten van spelers binnen de ingestelde straal."
+}
