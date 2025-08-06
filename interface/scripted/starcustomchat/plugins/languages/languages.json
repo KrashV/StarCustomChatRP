@@ -7,20 +7,21 @@
       "timeoutBeforePolling": 5
     },
 
-    "guiAddons": {
-      "btnSelectRPLanguage": {
-        "type": "button",
+    "leftMenuButtons": [
+      {
+        "name": "btnSelectRPLanguage",
         "zlevel": 40,
-        "visible": false,
-        "position": [6, 40],
+        "visible": true,
         "base": "/interface/scripted/starcustomchat/plugins/languages/interface/languages.png",
         "hover": "/interface/scripted/starcustomchat/plugins/languages/interface/languageshover.png",
         "callback": "customButtonCallback",
         "data": {
           "displayText": "chat.buttons.language"
         }
-      },
+      }
+    ],
 
+    "guiAddons": {
       "lytSelectLanguage": {
         "type": "layout",
         "layoutType": "basic",
@@ -52,6 +53,18 @@
                       "file" : "/interface/scripted/starcustomchat/plugins/languages/interface/listitem.png",
                       "position" : [2, 0],
                       "zlevel" : -1
+                    },
+                    "lagnuageProgress" : {
+                      "type" : "progress",
+                      "position" : [2, 0],
+                      "background" : "/interface/scripted/starcustomchat/plugins/languages/interface/listitem.png",
+                      "size" : [90, 15],
+                      "progressSet" : {
+                        "inner" : "/interface/scripted/starcustomchat/plugins/languages/interface/listprogress.png",
+                        "type" : "stretch"
+                      },
+                      "direction" : "horizontal",
+                      "mouseTransparent": true
                     },
                     "name" : {
                       "type" : "label",
