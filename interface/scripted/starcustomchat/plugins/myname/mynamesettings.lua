@@ -9,7 +9,8 @@ myname = SettingsPluginClass:new(
 function myname:init()
   self:_loadConfig()
 
-  self.myNameList = player.getProperty("scc_myname_list") or {}
+  self.myNameList = player.getProperty("scc_myname_list") or jarray()
+
   local coloring = root.getConfiguration("coloringscc_myname_coloring_enabled") or false
   local pingEnabled = root.getConfiguration("scc_myname_ping_enabled") or false
   local backgroundEnabled = root.getConfiguration("scc_myname_background_enabled") or false
@@ -23,6 +24,13 @@ function myname:openTab()
   self.widget.registerMemberCallback("saScrollArea.listItems", "removeName", function(_, data)
     self:removeName(_, data)
   end)
+
+  local newTable = jarray()
+  for k, v in pairs(self.myNameList) do
+    newTable[tonumber(k)] = v
+  end
+
+  self.myNameList = newTable
   self:populateScrollArea()
 end
 
