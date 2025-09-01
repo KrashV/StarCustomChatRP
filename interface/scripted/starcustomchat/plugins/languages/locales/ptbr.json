@@ -1,0 +1,14 @@
+{
+    "settings.plugins.languages": "Línguas de RP",
+    "settings.plugins.languages.no_languages_support": "Este servidor não possui suporte para línguas de RP",
+    "settings.plugins.languages.languages_disabled": "Línguas de RP não foram habilitadas",
+    "settings.plugins.languages.knowledge": "Conhecimento atual",
+    "settings.plugins.languages.difficulty": "Dificuldade:",
+    "settings.plugins.languages.difficulty_zero": "Comum",
+    "chat.buttons.language": "Selecione Língua de RP",
+    "chat.language.disabled": "^gray;Não há tradução",
+    "tooltips.languages.name": "Língua: %s",
+    "chat.alerts.languages.unknown": "^red;Você não conhece a língua %s",
+    "chat.alerts.languages.selected": "As strings em \"Aspas\" serão enviadas na língua %s",
+    "tooltips.languages.proficiency": "Proficiência: %s"
+}
