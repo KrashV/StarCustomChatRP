@@ -103,6 +103,7 @@ function editmessage:contextMenuButtonClick(buttonName, selectedMessage)
     self.editingMessage = selectedMessage
 
     local cleartext = starcustomchat.utils.clearMetatags(selectedMessage.text)
+    cleartext = string.gsub(cleartext, "\n", "\\n")
     self.customChat:openSubMenu("edit", starcustomchat.utils.getTranslation("chat.editing.hint"), self:cropMessage(cleartext))
     widget.focus("tbxInput")
     widget.setText("tbxInput", cleartext)

@@ -1,1 +1,2 @@
-Fixed MyName not saving the aliases. Weird.
++ Fixed MyName not saving the aliases. Weird.
++ Fixed the editting of messages containing the newlines not showing up.
