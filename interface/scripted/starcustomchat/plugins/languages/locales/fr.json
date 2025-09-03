@@ -1,0 +1,14 @@
+{
+    "settings.plugins.languages": "Langues RP",
+    "settings.plugins.languages.no_languages_support": "Les langues RP ne sont pas supportées sur ce serveur",
+    "settings.plugins.languages.languages_disabled": "Les langues RP ne sont pas activées",
+    "settings.plugins.languages.knowledge": "Connaissances actuelles",
+    "settings.plugins.languages.difficulty": "Difficulté:",
+    "settings.plugins.languages.difficulty_zero": "Commun",
+    "chat.buttons.language": "Sélection de la langue roleplay",
+    "chat.language.disabled": "^gray;Aucune traduction",
+    "tooltips.languages.name": "Language: %s",
+    "chat.alerts.languages.unknown": "^red;Vous ne connaissez pas la langue %s",
+    "chat.alerts.languages.selected": "Les textes entre \"Guillemets\" seront envoyés en langue %s",
+    "tooltips.languages.proficiency": "Maîtrise: %s"
+}

@@ -1,0 +1,14 @@
+{
+    "settings.plugins.languages": "RP-Talen",
+    "settings.plugins.languages.no_languages_support": "RP-talen worden niet ondersteund op deze server",
+    "settings.plugins.languages.languages_disabled": "RP-talen zijn niet actief",
+    "settings.plugins.languages.knowledge": "Huidige kennis",
+    "settings.plugins.languages.difficulty": "Moeilijkheidsgraad:",
+    "settings.plugins.languages.difficulty_zero": "Veelvoorkomend",
+    "chat.buttons.language": "Selecteer Roleplay Taal",
+    "chat.language.disabled": "^gray;Geen vertaling",
+    "tooltips.languages.name": "Taal: %s",
+    "chat.alerts.languages.unknown": "^red;Je kent de taal %s niet",
+    "chat.alerts.languages.selected": "De tekst binnen \"aanhalingstekens\" zal in de taal %s verstuurd worden",
+    "tooltips.languages.proficiency": "Taalvaardigheid: %s"
+}

@@ -13,7 +13,7 @@ function oocchat:formatIncomingMessage(message)
 
   if message.text:find("%(%(") then
     message.text = string.gsub(message.text, "%(%(.-%)%)", "^" .. self.customChat:getColor("occtext") .. ";%1^reset;")
-    message.text = string.gsub(message.text, "(.*)%(%((.-)$", "%1^" .. self.customChat:getColor("occtext") .. ";((%2")
+    message.text = string.gsub(message.text, "(.*)%(%((.-[^)][^)])$", "%1^" .. self.customChat:getColor("occtext") .. ";((%2")
   end
   return message
 end

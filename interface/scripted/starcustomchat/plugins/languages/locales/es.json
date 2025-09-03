@@ -1,0 +1,14 @@
+{
+    "settings.plugins.languages": "Idiomas de rol",
+    "settings.plugins.languages.no_languages_support": "Los idiomas de rol no son compatibles en este servidor",
+    "settings.plugins.languages.languages_disabled": "Los idiomas de rol no están habilitados",
+    "settings.plugins.languages.knowledge": "Conocimiento actual",
+    "settings.plugins.languages.difficulty": "Dificultad:",
+    "settings.plugins.languages.difficulty_zero": "Común",
+    "chat.buttons.language": "Seleccionar idioma de rol",
+    "chat.language.disabled": "^gray;Sin traducción",
+    "tooltips.languages.name": "Idioma: %s",
+    "chat.alerts.languages.unknown": "^red;No conoces el idioma %s",
+    "chat.alerts.languages.selected": "Las cadenas entre \"comillas\" se enviarán en el idioma %s",
+    "tooltips.languages.proficiency": "Dominio: %s"
+}

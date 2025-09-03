@@ -8,7 +8,7 @@ languages = PluginClass:new(
 function languages:init(chat)
   PluginClass.init(self, chat)
 
-  widget.setVisible("btnSelectRPLanguage", false)
+  widget.setButtonEnabled("lytLeftMenu.saButtons.btnSelectRPLanguage", false)
   self.defaultLi = ""
   self.languagesLevels = player.getProperty("scc_rp_languages", {})
   self.serverLanguagesData = nil
@@ -36,7 +36,7 @@ function languages:registerMessageHandlers()
   starcustomchat.utils.setMessageHandler( "scc_rp_languages", function(_, _, serverLanguagesData)
     if serverLanguagesData then
       self.serverLanguagesData = serverLanguagesData
-      widget.setVisible("btnSelectRPLanguage", true)
+      widget.setButtonEnabled("lytLeftMenu.saButtons.btnSelectRPLanguage", true)
       self:populateLanguageList()
     end
   end)
@@ -78,6 +78,7 @@ function languages:populateLanguageList()
       displayPlainText = (langConfig.description and langConfig.description .. " " or "") .. starcustomchat.utils.getTranslation("tooltips.languages.proficiency", string.format("%.0f%%", percProf))
     }
     
+    widget.setProgress("lytSelectLanguage.saLanguages.listChatLanguages." .. li .. ".lagnuageProgress", percProf / 100)
     widget.setText("lytSelectLanguage.saLanguages.listChatLanguages." .. li .. ".name", langConfig.name)
     widget.setData("lytSelectLanguage.saLanguages.listChatLanguages." .. li, data)
     widget.setData("lytSelectLanguage.saLanguages.listChatLanguages." .. li .. ".background", data)
@@ -261,9 +262,10 @@ function languages:onCustomButtonClick(btnName, data)
         end
       else
         self.selectedLanguage = nil
+        widget.setVisible("lytSelectLanguage", false)
       end
     end
-    widget.setButtonImages("btnSelectRPLanguage", {
+    widget.setButtonImages("lytLeftMenu.saButtons.btnSelectRPLanguage", {
       base = string.format("/interface/scripted/starcustomchat/plugins/languages/interface/languages%s.png", self.selectedLanguage and "selected" or ""),
       hover = string.format("/interface/scripted/starcustomchat/plugins/languages/interface/languages%shover.png",  self.selectedLanguage and "selected" or "")
     })

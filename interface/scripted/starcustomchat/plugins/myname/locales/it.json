@@ -1,0 +1,11 @@
+{
+    "settings.plugins.myname": "Il mio nome",
+    "settings.colors.myname": "Il mio nome",
+    "settings.plugins.myname.coloring_enabled": "Colore del nome",
+    "settings.plugins.myname.ping_enabled": "Ping",
+    "settings.plugins.myname.add_new_name": "+ Aggiungi nome",
+    "settings.plugins.myname.remove_name": "Rimuovi nome",
+    "settings.plugins.myname.background_enabled": "Colore sfondo",
+    "settings.plugins.myname.name_used": "%s ti ha menzionato",
+    "settings.colors.myname.background": "Sfondo del nome"
+}

@@ -1,0 +1,11 @@
+{
+    "settings.plugins.myname": "Mijn naam",
+    "settings.colors.myname": "Mijn naam",
+    "settings.plugins.myname.coloring_enabled": "Naam kleur",
+    "settings.plugins.myname.ping_enabled": "Ping",
+    "settings.plugins.myname.add_new_name": "+ Voeg nieuwe naam toe",
+    "settings.plugins.myname.remove_name": "Verwijder naam",
+    "settings.plugins.myname.background_enabled": "Achtergrondkleur",
+    "settings.plugins.myname.name_used": "%s heeft je genoemd",
+    "settings.colors.myname.background": "Mijn naam achterground"
+}
