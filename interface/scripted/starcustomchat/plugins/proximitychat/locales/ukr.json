@@ -1,0 +1,6 @@
+{
+    "chat.modes.Proximity": "Близікий",
+    "settings.proximity.radius": "Радіус близості",
+    "settings.plugins.proximitychat": "Близікий чат",
+    "settings.proximity.restrict_description": "Отримуйте повідомлення лише від гравців, що знаходяться у 'ближньому радіусі'."
+}

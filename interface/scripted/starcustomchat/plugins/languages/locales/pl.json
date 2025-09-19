@@ -1,0 +1,14 @@
+{
+    "settings.plugins.languages": "Języki RP",
+    "settings.plugins.languages.no_languages_support": "Języki RP nie są obsługiwane przez ten serwer",
+    "settings.plugins.languages.languages_disabled": "Języki RP nie są włączone",
+    "settings.plugins.languages.knowledge": "Bieżąca wiedza",
+    "settings.plugins.languages.difficulty": "Trudność:",
+    "settings.plugins.languages.difficulty_zero": "Wspólny język",
+    "chat.buttons.language": "Wybierz Język RP",
+    "chat.language.disabled": "^gray;Brak translacji",
+    "tooltips.languages.name": "Język: %s",
+    "chat.alerts.languages.unknown": "^red;Nie znasz języku %s",
+    "chat.alerts.languages.selected": "Wiadomości w \"Cytatach\" zostaną wysłane w języku %s",
+    "tooltips.languages.proficiency": "Biegłość: %s"
+}
