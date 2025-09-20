@@ -7,7 +7,7 @@ myname = PluginClass:new(
 function myname:init(chat)
   PluginClass.init(self, chat)
 
-  self.myNameList = player.getProperty("scc_myname_list") or {}
+  self.myNameList = player.getProperty("scc_myname_list") or jarray()
   self.coloringEnabled = root.getConfiguration("coloringscc_myname_coloring_enabled") or false
   self.pingEnabled = root.getConfiguration("scc_myname_ping_enabled") or false
   self.backgroundEnabled = root.getConfiguration("scc_myname_background_enabled") or false
@@ -26,7 +26,7 @@ function myname:populateMessagesToHighlight()
 end
 
 function myname:onSettingsUpdate()
-  self.myNameList = player.getProperty("scc_myname_list") or {}
+  self.myNameList = player.getProperty("scc_myname_list") or jarray()
   table.insert(self.myNameList, player.name())
   self.coloringEnabled = root.getConfiguration("coloringscc_myname_coloring_enabled") or false
   self.pingEnabled = root.getConfiguration("scc_myname_ping_enabled") or false

@@ -1,0 +1,6 @@
+{
+    "chat.modes.Proximity": "Zbliżeniowość",
+    "settings.proximity.radius": "Zasięg zbliżeniowości",
+    "settings.plugins.proximitychat": "Czat zbliżeniowy",
+    "settings.proximity.restrict_description": "Otrzymuj wiadomości oparte na zbliżeniowości tylko od graczy znajdujących się w określonym zasięgu"
+}

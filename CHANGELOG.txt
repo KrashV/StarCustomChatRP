@@ -1,4 +1,4 @@
 ## Localisation Support
-Spanish
-French
-German
+Ukrainian
+Brazilian
+Polish

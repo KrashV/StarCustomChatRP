@@ -1,0 +1,14 @@
+{
+    "settings.plugins.languages": "Мови RP",
+    "settings.plugins.languages.no_languages_support": "Мови RP не підримуються на цьому сервері",
+    "settings.plugins.languages.languages_disabled": "Мови RP не ввімкнено",
+    "settings.plugins.languages.knowledge": "Поточні знання",
+    "settings.plugins.languages.difficulty": "Складність:",
+    "settings.plugins.languages.difficulty_zero": "Звичайна",
+    "chat.buttons.language": "Виберіть мову для RP",
+    "chat.language.disabled": "^gray;Без перекладу",
+    "tooltips.languages.name": "Мова: %s",
+    "chat.alerts.languages.unknown": "^red;Ви не знаєте %s мову",
+    "chat.alerts.languages.selected": "Слова у \"Цитаті\" буде надіслано %s мовою",
+    "tooltips.languages.proficiency": "Майстерність: %s"
+}
