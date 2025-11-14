@@ -1,3 +1,5 @@
+> **This fork by @FezzedOne is *not* supported or endorsed by @KrashV / Degranon, the original author.**
+
 # StarCustomChat: Roleplay
 
 This plugin for [StarCustomChat](https://github.com/KrashV/StarCustomChat) is dedicated to the roleplay aspects of the game. It consists of the following modules:
