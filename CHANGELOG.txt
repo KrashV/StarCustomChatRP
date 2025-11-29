@@ -1,4 +1,1 @@
-## Localisation Support
-Ukrainian
-Brazilian
-Polish
+- MyName: fixed incorrect higlighting of your own messages if the server coloured your name

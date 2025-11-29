@@ -42,7 +42,7 @@ function myname:update(dt)
 end
 
 function myname:formatIncomingMessage(message)
-  if not message.nickname or message.nickname == player.name() or message.connection == 0 or message.mode == "CommandResult" then
+  if not message.nickname or starcustomchat.utils.clearMetatags(message.nickname) == starcustomchat.utils.clearMetatags(player.name()) or message.connection == 0 or message.mode == "CommandResult" then
     return message
   end
 
