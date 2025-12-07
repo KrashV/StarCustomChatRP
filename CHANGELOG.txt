@@ -1,1 +1,0 @@
-- MyName: fixed incorrect higlighting of your own messages if the server coloured your name

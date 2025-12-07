@@ -1,0 +1,1 @@
+EditMessage: Moved the handler of editted messages to the base mod
