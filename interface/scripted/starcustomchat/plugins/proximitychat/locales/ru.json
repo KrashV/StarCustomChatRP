@@ -2,5 +2,5 @@
     "chat.modes.Proximity": "Близкий",
     "settings.proximity.radius": "Радиус близких сообщений",
     "settings.plugins.proximitychat": "Близкий чат",
-    "settings.proximity.restrict_description": "Получать близкие сообщения только от персонажей в радиусе"
+    "settings.proximity.restrict_description": "Получать близкие сообщения только от персонажей в этом радиусе"
 }
