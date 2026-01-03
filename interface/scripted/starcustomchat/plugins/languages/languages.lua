@@ -225,7 +225,9 @@ function languages:formatOutcomingMessage(message)
     end)
 
     message.silent = true
-    player.say(originalText)
+    if not message.mode == "Whisper" then
+      player.say(originalText)
+    end
   end
   return message
 end
