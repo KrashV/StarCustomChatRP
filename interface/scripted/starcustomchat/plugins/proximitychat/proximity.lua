@@ -8,6 +8,9 @@ function proximitychat:init()
   self:_loadConfig()
   self.proximityRadius = root.getConfiguration("scc_proximity_radius") or self.proximityRadius
   self.receivingRestricted = root.getConfiguration("scc_proximity_restricted") or false
+  widget.setText("lytProxChangeRadius.lblProxRadiusValue", self.proximityRadius)
+  widget.setSliderRange("lytProxChangeRadius.sldProxRadius", 0, 90, 1)
+  widget.setSliderValue("lytProxChangeRadius.sldProxRadius", self.proximityRadius - 10)
 end
 
 function proximitychat:onSendMessage(message)
@@ -67,14 +70,49 @@ function proximitychat:onReceiveMessage(message)
 end
 
 function proximitychat:onSettingsUpdate(data)
-  self.proximityRadius = root.getConfiguration("scc_proximity_radius") or self.proximityRadius
-  self.receivingRestricted = root.getConfiguration("scc_proximity_restricted") or false
+  if data then
+    if data.newProximityRadius then
+      self.proximityRadius = data.newProximityRadius
+      widget.setText("lytProxChangeRadius.lblProxRadiusValue", self.proximityRadius)
+      widget.setSliderValue("lytProxChangeRadius.sldProxRadius", self.proximityRadius - 10)
+      root.setConfiguration("scc_proximity_radius", self.proximityRadius)
+    elseif data.newProximityRestriction then
+      self.receivingRestricted = data.newProximityRestriction or false
+      root.setConfiguration("scc_proximity_restricted", self.receivingRestricted)
+    end
+  end
 end
 
 function proximitychat:onCursorOverride(screenPosition)
   local id = findButtonByMode("Proximity")
 
-  if widget.inMember("rgChatMode." .. id, screenPosition) and player.id() and world.entityPosition(player.id()) then
-    starcustomchat.utils.drawCircle(world.entityPosition(player.id()), self.proximityRadius, "green")
+  if player.id() and world.entityPosition(player.id()) then
+    if widget.inMember("rgChatMode." .. id, screenPosition) then
+      starcustomchat.utils.drawCircle(world.entityPosition(player.id()), self.proximityRadius, "green")
+    end
+
+    if widget.getSelectedData("rgChatMode").mode == "Proximity" and (
+    widget.inMember("rgChatMode." .. id, screenPosition) or widget.inMember("lytProxChangeRadius", screenPosition)) then
+      widget.setVisible("lytProxChangeRadius", true)
+
+      if widget.inMember("lytProxChangeRadius.sldProxRadius", screenPosition) then
+        starcustomchat.utils.drawCircle(world.entityPosition(player.id()), self.proximityRadius, "green")
+      end
+    else
+      widget.setVisible("lytProxChangeRadius", false)
+    end
+  end
+end
+
+function proximitychat:onLocaleChange()
+  widget.setText("lytProxChangeRadius.lblRadius", starcustomchat.utils.getTranslation("settings.proximity.radius"))
+end
+
+
+function proximitychat:onCustomButtonClick(widgetName)
+  if widgetName == "sldProxRadius" then
+    self:onSettingsUpdate({
+      newProximityRadius = widget.getSliderValue("lytProxChangeRadius.sldProxRadius") + 10
+    })
   end
 end

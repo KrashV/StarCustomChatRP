@@ -4,7 +4,6 @@ proximitychat = SettingsPluginClass:new(
   { name = "proximitychat" }
 )
 
-
 -- Settings
 function proximitychat:init()
   self:_loadConfig()
@@ -31,11 +30,13 @@ end
 function proximitychat:updateProxRadius(widgetName)
   self.proximityRadius = self.widget.getSliderValue("" .. widgetName) + 10
   self.widget.setText("lblProxRadiusValue", self.proximityRadius)
-  root.setConfiguration("scc_proximity_radius", self.proximityRadius)
-  save()
+  save({
+    newProximityRadius = self.proximityRadius
+  })
 end
 
 function proximitychat:restrictReceiving()
-  root.setConfiguration("scc_proximity_restricted", self.widget.getChecked("chkRestrictReceiving"))
-  save()
+  save({
+    newProximityRestriction = self.widget.getChecked("chkRestrictReceiving")
+  })
 end

@@ -14,10 +14,46 @@
     }
   },
 
+  "guiAddons": {
+    "lytProxChangeRadius": {
+      "type": "layout",
+      "layoutType": "basic",
+      "visible": false,
+      "zlevel": 120,
+      "size": [180, 30],
+      "position": [25, 10],
+      "children": {
+        "background": {
+          "type": "image",
+          "file": "/interface/scripted/starcustomchat/plugins/proximitychat/interface/background.png"
+        },
+        "lblRadius": {
+          "type": "label",
+          "position": [90, 20],
+          "hAnchor": "mid",
+          "value": "",
+          "translationKey": "settings.proximity.radius"
+        },
+        "sldProxRadius" : {
+          "type": "slider",
+          "gridImage" : "/interface/optionsmenu/largeselection.png",
+          "position": [20, 7],
+          "callback": "customButtonCallback"
+        },
+        "lblProxRadiusValue" : {
+          "type": "label",
+          "position": [150, 7],
+          "hAnchor": "mid",
+          "value": "10"
+        }
+      }
+    }
+  },
+
   "parameters": {
     "uniqueStagehandType": "",
     "stagehandType": "",
-    "proximityRadius": 100
+    "proximityRadius": 50
   },
 
   "settingsPage": {
