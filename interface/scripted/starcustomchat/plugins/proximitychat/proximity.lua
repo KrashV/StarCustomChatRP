@@ -42,7 +42,7 @@ function proximitychat:onSendMessage(message)
       promises:add(sendMessagePromise)
     end
 
-    if not message.outloud then
+    if not message.silent then
       player.say(message.text)
     end
   end

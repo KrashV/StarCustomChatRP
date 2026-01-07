@@ -225,8 +225,10 @@ function languages:formatOutcomingMessage(message)
     end)
 
     message.silent = true
-    if not message.mode == "Whisper" then
-      player.say(originalText)
+    if message.mode ~= "Whisper" then
+      player.say(originalText:gsub('%b""', function(quoted)
+        return shuffleFunction(quoted, 0, 1)
+      end))
     end
   end
   return message
