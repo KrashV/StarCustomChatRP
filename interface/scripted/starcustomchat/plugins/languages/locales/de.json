@@ -9,6 +9,6 @@
     "chat.language.disabled": "^gray;Keine Übersetzung",
     "tooltips.languages.name": "Sprache: %s",
     "chat.alerts.languages.unknown": "^red;Du kennst die Sprache %s nicht",
-    "chat.alerts.languages.selected": "Der Text in \"Anführungszeichen\" wird in der Sprache %s versendet",
+    "chat.alerts.languages.selected": "Der Text in \"Anführungszeichen\" wird in der Sprache ^green;%s^reset; versendet",
     "tooltips.languages.proficiency": "Wissensstand: %s"
 }

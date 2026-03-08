@@ -1,0 +1,12 @@
+[
+  {
+    "op": "add",
+    "path": "/0",
+    "value": "crit_success"
+  },
+  {
+    "op": "add",
+    "path": "/0",
+    "value": "crit_fail"
+  }
+]

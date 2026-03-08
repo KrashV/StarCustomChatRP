@@ -9,6 +9,6 @@
     "chat.language.disabled": "^gray;No translation",
     "tooltips.languages.name": "Language: %s",
     "chat.alerts.languages.unknown": "^red;You don't know the %s language",
-    "chat.alerts.languages.selected": "The strings in \"Quotations\" will be sent in %s language",
+    "chat.alerts.languages.selected": "The strings in \"Quotations\" will be sent in ^green;%s^reset; language",
     "tooltips.languages.proficiency": "Proficiency: %s"
 }

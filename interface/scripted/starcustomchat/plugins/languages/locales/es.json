@@ -9,6 +9,6 @@
     "chat.language.disabled": "^gray;Sin traducción",
     "tooltips.languages.name": "Idioma: %s",
     "chat.alerts.languages.unknown": "^red;No conoces el idioma %s",
-    "chat.alerts.languages.selected": "Las cadenas entre \"comillas\" se enviarán en el idioma %s",
+    "chat.alerts.languages.selected": "Las cadenas entre \"comillas\" se enviarán en el idioma ^green;%s^reset;",
     "tooltips.languages.proficiency": "Dominio: %s"
 }

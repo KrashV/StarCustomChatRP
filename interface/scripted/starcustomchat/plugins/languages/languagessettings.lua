@@ -27,47 +27,56 @@ function languages:isAvailable()
 end
 
 function languages:buildLanguagesList()
-  self.widget.clearListItems("saLanguages.listItems")
+  self.widget.clearListItems("lytBase.saLanguages.listItems")
   if self.serverLanguagesData then
     self.serverLanguagesData = copy(self.serverLanguagesData)
-    self.widget.setVisible("saLanguages", true)
-    self.widget.clearListItems("saLanguages.listItems")
+    self.widget.setVisible("lytBase.saLanguages", true)
+    self.widget.clearListItems("lytBase.saLanguages.listItems")
 
     for code, language in pairs(self.serverLanguagesData) do
-      local li = self.widget.addListItem("saLanguages.listItems")
-      self.widget.setText("saLanguages.listItems." .. li .. ".name", language.name)
-      self.widget.setData("saLanguages.listItems." .. li, code)
+      local li = self.widget.addListItem("lytBase.saLanguages.listItems")
+      local difficulty = self.serverLanguagesData[code].difficulty or 1
+
+      local percProf
+      if difficulty == 0 then
+        percProf = 100
+      else
+        percProf = (self.languagesLevels[code] and self.languagesLevels[code].knowledge or 0) / difficulty * 100
+      end
+
+      self.widget.setText("lytBase.saLanguages.listItems." .. li .. ".name", language.name)
+      self.widget.setProgress("lytBase.saLanguages.listItems." .. li .. ".lagnuageProgress", percProf / 100)
+      self.widget.setData("lytBase.saLanguages.listItems." .. li, code)
     end
   end
 end
 
 function languages:getSelectedLanguageData()
-  local li = self.widget.getListSelected("saLanguages.listItems")
+  local li = self.widget.getListSelected("lytBase.saLanguages.listItems")
   if li then
-    return self.widget.getData("saLanguages.listItems." .. li)
+    return self.widget.getData("lytBase.saLanguages.listItems." .. li)
   end
 end
 
 
 function languages:selectLanguage()
 
-  -- I don't know why, but all the kids are visible...
-  self.widget.setVisible("lblLanguageName", true)
-  self.widget.setVisible("lblDescription", true)
-  self.widget.setVisible("lblDifficultyValue", true)
-  self.widget.setVisible("lblKnowledgeHint", true)
-  self.widget.setVisible("lblKnowledgePercent", true)
-  self.widget.setVisible("spnKnowledge", true)
-  self.widget.setVisible("lblDifficultyHint", true)
+  self.widget.setVisible("lytBase.lblLanguageName", true)
+  self.widget.setVisible("lytBase.lblDescription", true)
+  self.widget.setVisible("lytBase.lblDifficultyValue", true)
+  self.widget.setVisible("lytBase.lblKnowledgeHint", true)
+  self.widget.setVisible("lytBase.lblKnowledgePercent", true)
+  self.widget.setVisible("lytBase.spnKnowledge", true)
+  self.widget.setVisible("lytBase.lblDifficultyHint", true)
 
 
   local code = self:getSelectedLanguageData()
   if code then
-    self.widget.setText("lblLanguageName", self.serverLanguagesData[code].name)
-    self.widget.setText("lblDescription", self.serverLanguagesData[code].description or "")
+    self.widget.setText("lytBase.lblLanguageName", self.serverLanguagesData[code].name)
+    self.widget.setText("lytBase.lblDescription", self.serverLanguagesData[code].description or "")
 
     local diff = self.serverLanguagesData[code].difficulty
-    self.widget.setText("lblDifficultyValue", diff and (diff == 0 and starcustomchat.utils.getTranslation("settings.plugins.languages.difficulty_zero") or diff) or 1)
+    self.widget.setText("lytBase.lblDifficultyValue", diff and (diff == 0 and starcustomchat.utils.getTranslation("settings.plugins.languages.difficulty_zero") or diff) or 1)
     
     self:printCurrentLevel(self.languagesLevels[code] and self.languagesLevels[code].knowledge, diff)
   end
@@ -84,7 +93,10 @@ function languages:printCurrentLevel(level, max)
   else
     percentLevel = level / max * 100
   end
-  self.widget.setText("lblKnowledgePercent", string.format("%.0f%%", percentLevel))
+
+  local li = self.widget.getListSelected("lytBase.saLanguages.listItems")
+  self.widget.setProgress("lytBase.saLanguages.listItems." .. li .. ".lagnuageProgress", percentLevel / 100)
+  self.widget.setText("lytBase.lblKnowledgePercent", string.format("%.0f%%", percentLevel))
 end
 
 languages.spnKnowledge = {}

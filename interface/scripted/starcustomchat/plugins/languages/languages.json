@@ -27,7 +27,7 @@
         "layoutType": "basic",
         "visible": false,
         "zlevel": 120,
-        "size": [90, 95],
+        "size": [100, 95],
         "position": [25, 30],
         "children": {
           "background": {
@@ -37,7 +37,7 @@
           "saLanguages": {
             "type": "scrollArea",
             "position": [0, 0],
-            "size": [90, 85],
+            "size": [100, 85],
             "children": {
               "listChatLanguages": {
                 "type": "list",
@@ -46,7 +46,7 @@
                   "selectedBG" : "/interface/scripted/starcustomchat/plugins/languages/interface/listitemselected.png",
                   "unselectedBG" : "/interface/scripted/starcustomchat/plugins/languages/interface/listitem.png",
                   "spacing" : [0, 1],
-                  "memberSize" : [90, 15],
+                  "memberSize" : [100, 15],
                   "listTemplate" : {
                     "background" : {
                       "type" : "image",
@@ -71,7 +71,7 @@
                       "hAnchor": "mid",
                       "vAnchor": "mid",
                       "position": [45, 7],
-                      "wrapWidth": 80,
+                      "wrapWidth": 90,
                       "mouseTransparent": true
                     }
                   }
@@ -121,93 +121,111 @@
           "translationKey": "settings.plugins.languages.no_languages_support"
         },
 
-        "lblLanguageName": {
-          "type": "label",
-          "hAnchor": "mid",
-          "visible": false,
-          "fontSize": 12,
-          "value": "",
-          "position": [170, 120]
-        },
-        "lblDescription": {
-          "type": "label",
-          "hAnchor": "mid",
-          "vAnchor": "top",
-          "visible": false,
-          "fontSize": 6,
-          "value": "",
-          "wrapWidth": 120,
-          "position": [170, 115]
-        },
-      
-
-
-        "lblDifficultyHint": {
-          "type": "label",
-          "visible": false,
-          "position": [180, 80],
-          "hAnchor": "right",
-          "translationKey": "settings.plugins.languages.difficulty"
-        },
-
-        "lblDifficultyValue": {
-          "type": "label",
-          "visible": false,
-          "position": [185, 80],
-          "hAnchor": "left"
-        },
-        
-        "lblKnowledgeHint": {
-          "type": "label",
-          "color": "gray",
-          "visible": false,
-          "position": [170, 60],
-          "hAnchor": "mid",
-          "translationKey": "settings.plugins.languages.knowledge"
-        },
-
-        "lblKnowledgePercent": {
-          "type": "label",
-          "visible": false,
-          "position": [178, 50],
-          "value": "",
-          "hAnchor": "right"
-        },
-
-        "spnKnowledge": {
-          "type": "spinner",
-          "visible": false,
-          "position" : [140, 50],
-          "upOffset" : 50,
-          "callback": "spnKnowledge"
-        },
-
-        "saLanguages": {
-          "type": "scrollArea",
-          "rect": [5, 35, 95, 130],
-          "visible": false,
+        "lytBase": {
+          "type": "layout",
+          "layoutType": "basic",
+          "rect": [0, 0, 300, 200],
           "children": {
-            "listItems": {
-              "type": "list",
-              "callback": "selectLanguage",
-              "schema": {
-                "selectedBG" : "/interface/scripted/starcustomchat/plugins/languages/listselected.png",
-                "unselectedBG" : "/interface/scripted/starcustomchat/plugins/languages/listunselected.png",
-                "spacing" : [0, 1],
-                "memberSize" : [100, 15],
-                "listTemplate" : {
-                  "background" : {
-                    "type" : "image",
-                    "file" : "/interface/scripted/starcustomchat/plugins/languages/listunselected.png",
-                    "position" : [2, 0],
-                    "zlevel" : -1
-                  },
-                  "name" : {
-                    "type" : "label",
-                    "hAnchor": "mid",
-                    "vAnchor": "mid",
-                    "position": [50, 7],
-                    "wrapWidth": 60
+            "lblLanguageName": {
+              "type": "label",
+              "hAnchor": "mid",
+              "visible": false,
+              "fontSize": 12,
+              "value": "",
+              "position": [170, 120]
+            },
+            "lblDescription": {
+              "type": "label",
+              "hAnchor": "mid",
+              "vAnchor": "top",
+              "visible": false,
+              "fontSize": 6,
+              "value": "",
+              "wrapWidth": 120,
+              "position": [170, 115]
+            },
+          
+
+            "lblDifficultyHint": {
+              "type": "label",
+              "visible": false,
+              "position": [180, 80],
+              "hAnchor": "right",
+              "translationKey": "settings.plugins.languages.difficulty"
+            },
+
+            "lblDifficultyValue": {
+              "type": "label",
+              "visible": false,
+              "position": [185, 80],
+              "hAnchor": "left"
+            },
+            
+            "lblKnowledgeHint": {
+              "type": "label",
+              "color": "gray",
+              "visible": false,
+              "position": [170, 60],
+              "hAnchor": "mid",
+              "translationKey": "settings.plugins.languages.knowledge"
+            },
+
+            "lblKnowledgePercent": {
+              "type": "label",
+              "visible": false,
+              "position": [178, 50],
+              "value": "",
+              "hAnchor": "right"
+            },
+
+            "spnKnowledge": {
+              "type": "spinner",
+              "visible": false,
+              "position" : [140, 50],
+              "upOffset" : 50,
+              "callback": "spnKnowledge"
+            },
+
+            "saLanguages": {
+              "type": "scrollArea",
+              "rect": [5, 35, 95, 130],
+              "visible": false,
+              "children": {
+                "listItems": {
+                  "type": "list",
+                  "callback": "selectLanguage",
+                  "schema": {
+                    "selectedBG" : "/interface/scripted/starcustomchat/plugins/languages/listselected.png",
+                    "unselectedBG" : "/interface/scripted/starcustomchat/plugins/languages/listunselected.png",
+                    "spacing" : [0, 1],
+                    "memberSize" : [100, 15],
+                    "listTemplate" : {
+                      "background" : {
+                        "type" : "image",
+                        "file" : "/interface/scripted/starcustomchat/plugins/languages/listunselected.png",
+                        "position" : [2, 0],
+                        "zlevel" : -1
+                      },
+                      "lagnuageProgress" : {
+                        "type" : "progress",
+                        "position" : [2, 0],
+                        "background" : "/interface/scripted/starcustomchat/plugins/languages/interface/listitem.png",
+                        "size" : [90, 15],
+                        "progressSet" : {
+                          "inner" : "/interface/scripted/starcustomchat/plugins/languages/interface/listprogress.png",
+                          "type" : "stretch"
+                        },
+                        "direction" : "horizontal",
+                        "mouseTransparent": true
+                      },
+                      "name" : {
+                        "type" : "label",
+                        "hAnchor": "mid",
+                        "vAnchor": "mid",
+                        "position": [50, 7],
+                        "wrapWidth": 60
+                      }
+                    }
                   }
                 }
               }

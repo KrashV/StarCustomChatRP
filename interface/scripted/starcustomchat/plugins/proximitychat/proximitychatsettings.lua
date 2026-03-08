@@ -9,8 +9,8 @@ function proximitychat:init()
   self:_loadConfig()
 
   self.proximityRadius = root.getConfiguration("scc_proximity_radius") or self.proximityRadius
-  self.widget.setSliderRange("sldProxRadius", 0, 90, 1)
-  self.widget.setSliderValue("sldProxRadius", self.proximityRadius - 10)
+  self.widget.setSliderRange("sldProxRadius", 0, self.proximityMax - self.proximityMin, 1)
+  self.widget.setSliderValue("sldProxRadius", self.proximityRadius - self.proximityMin)
   self.widget.setText("lblProxRadiusValue", self.proximityRadius)
 
   self.widget.setChecked("chkRestrictReceiving", root.getConfiguration("scc_proximity_restricted") or false)
@@ -28,7 +28,7 @@ function proximitychat:cursorOverride(screenPosition)
 end
 
 function proximitychat:updateProxRadius(widgetName)
-  self.proximityRadius = self.widget.getSliderValue("" .. widgetName) + 10
+  self.proximityRadius = self.widget.getSliderValue("" .. widgetName) + self.proximityMin
   self.widget.setText("lblProxRadiusValue", self.proximityRadius)
   save({
     newProximityRadius = self.proximityRadius

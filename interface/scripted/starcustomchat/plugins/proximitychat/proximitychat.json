@@ -21,7 +21,7 @@
       "visible": false,
       "zlevel": 120,
       "size": [180, 30],
-      "position": [25, 10],
+      "position": [25, 13],
       "children": {
         "background": {
           "type": "image",
@@ -45,6 +45,67 @@
           "position": [150, 7],
           "hAnchor": "mid",
           "value": "10"
+        },
+
+        "btnTreshold1": {
+          "type": "button",
+          "base": "/interface/scripted/starcustomchat/plugins/proximitychat/interface/treshold.png:base",
+          "hover": "/interface/scripted/starcustomchat/plugins/proximitychat/interface/treshold.png:hover",
+          "position": [29, 2],
+          "zlevel": 122,
+          "callback": "customButtonCallback",
+          "data": {
+            "treshold": 0,
+            "displayPlainText": "0%"
+          }
+        },
+        "btnTreshold2": {
+          "type": "button",
+          "base": "/interface/scripted/starcustomchat/plugins/proximitychat/interface/treshold.png:base",
+          "hover": "/interface/scripted/starcustomchat/plugins/proximitychat/interface/treshold.png:hover",
+          "position": [51, 2],
+          "zlevel": 122,
+          "callback": "customButtonCallback",
+          "data": {
+            "treshold": 0.25,
+            "displayPlainText": "25%"
+          }
+        },
+        "btnTreshold3": {
+          "type": "button",
+          "base": "/interface/scripted/starcustomchat/plugins/proximitychat/interface/treshold.png:base",
+          "hover": "/interface/scripted/starcustomchat/plugins/proximitychat/interface/treshold.png:hover",
+          "position": [74, 2],
+          "zlevel": 122,
+          "callback": "customButtonCallback",
+          "data": {
+            "treshold": 0.5,
+            "displayPlainText": "50%"
+          }
+        },
+        "btnTreshold4": {
+          "type": "button",
+          "base": "/interface/scripted/starcustomchat/plugins/proximitychat/interface/treshold.png:base",
+          "hover": "/interface/scripted/starcustomchat/plugins/proximitychat/interface/treshold.png:hover",
+          "position": [97, 2],
+          "zlevel": 122,
+          "callback": "customButtonCallback",
+          "data": {
+            "treshold": 0.75,
+            "displayPlainText": "75%"
+          }
+        },
+        "btnTreshold5": {
+          "type": "button",
+          "base": "/interface/scripted/starcustomchat/plugins/proximitychat/interface/treshold.png:base",
+          "hover": "/interface/scripted/starcustomchat/plugins/proximitychat/interface/treshold.png:hover",
+          "position": [120, 2],
+          "zlevel": 122,
+          "callback": "customButtonCallback",
+          "data": {
+            "treshold": 1,
+            "displayPlainText": "100%"
+          }
         }
       }
     }
@@ -53,7 +114,9 @@
   "parameters": {
     "uniqueStagehandType": "",
     "stagehandType": "",
-    "proximityRadius": 50
+    "proximityRadius": 50,
+    "proximityMin": 5,
+    "proximityMax": 100
   },
 
   "settingsPage": {

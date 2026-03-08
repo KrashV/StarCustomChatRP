@@ -4,22 +4,33 @@ proximitychat = PluginClass:new(
   { name = "proximitychat" }
 )
 
-function proximitychat:init()
-  self:_loadConfig()
+function proximitychat:init(chat)
+  PluginClass.init(self, chat)
+  
   self.proximityRadius = root.getConfiguration("scc_proximity_radius") or self.proximityRadius
   self.receivingRestricted = root.getConfiguration("scc_proximity_restricted") or false
   widget.setText("lytProxChangeRadius.lblProxRadiusValue", self.proximityRadius)
-  widget.setSliderRange("lytProxChangeRadius.sldProxRadius", 0, 90, 1)
-  widget.setSliderValue("lytProxChangeRadius.sldProxRadius", self.proximityRadius - 10)
+  widget.setSliderRange("lytProxChangeRadius.sldProxRadius", 0, self.proximityMax - self.proximityMin, 1)
+  widget.setSliderValue("lytProxChangeRadius.sldProxRadius", self.proximityRadius - self.proximityMin)
+
+  -- Auto-hide timer: onCursorOverride will reset this when the cursor is over the chat.
+  self._proxShowTimeout = 0.15
+  self._proxShowTimer = 0
+
+  self.stagehandEnabled = false
+end
+
+function proximitychat:registerStagehandHandlers(handlers)
+  self.stagehandEnabled = handlers and handlers["sendProxyMessage"]
 end
 
 function proximitychat:onSendMessage(message)
   if message.mode == "Proximity" then
     message.proximityRadius = self.proximityRadius
     
-    if self.uniqueStagehandType and self.uniqueStagehandType ~= "" then
+    if self.stagehandEnabled and self.uniqueStagehandType and self.uniqueStagehandType ~= "" then
       starcustomchat.utils.sendMessageToUniqueStagehand(self.uniqueStagehandType, "icc_sendMessage", message)
-    elseif self.stagehandType and self.stagehandType ~= "" then
+    elseif self.stagehandEnabled and self.stagehandType and self.stagehandType ~= "" then
       starcustomchat.utils.createStagehandWithData(self.stagehandType, {message = "sendProxyMessage", data = message})
     else
       
@@ -51,7 +62,7 @@ end
 function proximitychat:formatIncomingMessage(message)
   if message.mode == "Proximity" then
     if self.receivingRestricted and message.connection then
-      local authorEntityId = message.connection * -65536
+      local authorEntityId = starcustomchat.utils.connectionToEntityId(message.connection)
       if world.entityExists(authorEntityId) then
         if world.magnitude(world.entityPosition(player.id()), world.entityPosition(authorEntityId)) > self.proximityRadius then
           message.text = ""
@@ -63,18 +74,12 @@ function proximitychat:formatIncomingMessage(message)
   return message
 end
 
-function proximitychat:onReceiveMessage(message)
-  if message.connection ~= 0 and message.mode == "Proximity" then
-    sb.logInfo("Chat: <%s> %s", message.nickname, message.text)
-  end
-end
-
 function proximitychat:onSettingsUpdate(data)
   if data then
     if data.newProximityRadius then
       self.proximityRadius = data.newProximityRadius
       widget.setText("lytProxChangeRadius.lblProxRadiusValue", self.proximityRadius)
-      widget.setSliderValue("lytProxChangeRadius.sldProxRadius", self.proximityRadius - 10)
+      widget.setSliderValue("lytProxChangeRadius.sldProxRadius", self.proximityRadius - self.proximityMin)
       root.setConfiguration("scc_proximity_radius", self.proximityRadius)
     elseif data.newProximityRestriction then
       self.receivingRestricted = data.newProximityRestriction or false
@@ -94,11 +99,26 @@ function proximitychat:onCursorOverride(screenPosition)
     if widget.getSelectedData("rgChatMode").mode == "Proximity" and (
     widget.inMember("rgChatMode." .. id, screenPosition) or widget.inMember("lytProxChangeRadius", screenPosition)) then
       widget.setVisible("lytProxChangeRadius", true)
+      self._proxShowTimer = self._proxShowTimeout
 
       if widget.inMember("lytProxChangeRadius.sldProxRadius", screenPosition) then
         starcustomchat.utils.drawCircle(world.entityPosition(player.id()), self.proximityRadius, "green")
+      elseif string.find(widget.getChildAt(screenPosition), "btnTreshold%d") then
+        local treshold = widget.getData(widget.getChildAt(screenPosition):sub(2)).treshold
+        starcustomchat.utils.drawCircle(world.entityPosition(player.id()), self.proximityRadius, "green")
+        starcustomchat.utils.drawCircle(world.entityPosition(player.id()), math.floor(treshold * (self.proximityMax - self.proximityMin) + self.proximityMin), "yellow")
       end
     else
+      widget.setVisible("lytProxChangeRadius", false)
+      self._proxShowTimer = 0
+    end
+  end
+end
+
+function proximitychat:update(dt)
+  if self._proxShowTimer and self._proxShowTimer > 0 then
+    self._proxShowTimer = math.max(self._proxShowTimer - dt, 0)
+    if self._proxShowTimer == 0 then
       widget.setVisible("lytProxChangeRadius", false)
     end
   end
@@ -112,7 +132,12 @@ end
 function proximitychat:onCustomButtonClick(widgetName)
   if widgetName == "sldProxRadius" then
     self:onSettingsUpdate({
-      newProximityRadius = widget.getSliderValue("lytProxChangeRadius.sldProxRadius") + 10
+      newProximityRadius = widget.getSliderValue("lytProxChangeRadius.sldProxRadius") + self.proximityMin
     })
+  elseif string.find(widgetName, "btnTreshold%d") then
+    local treshold = widget.getData("lytProxChangeRadius." .. widgetName).treshold
+    self.proximityRadius = math.floor(treshold * (self.proximityMax - self.proximityMin) + self.proximityMin)
+    widget.setSliderValue("lytProxChangeRadius.sldProxRadius", self.proximityRadius - self.proximityMin)
+    self:onSettingsUpdate({ newProximityRadius = self.proximityRadius })
   end
 end

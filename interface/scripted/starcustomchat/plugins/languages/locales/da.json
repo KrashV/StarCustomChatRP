@@ -9,6 +9,6 @@
     "chat.language.disabled": "^gray;Geen vertaling",
     "tooltips.languages.name": "Taal: %s",
     "chat.alerts.languages.unknown": "^red;Je kent de taal %s niet",
-    "chat.alerts.languages.selected": "De tekst binnen \"aanhalingstekens\" zal in de taal %s verstuurd worden",
+    "chat.alerts.languages.selected": "De tekst binnen \"aanhalingstekens\" zal in de taal ^green;%s^reset; verstuurd worden",
     "tooltips.languages.proficiency": "Taalvaardigheid: %s"
 }

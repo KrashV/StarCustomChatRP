@@ -9,6 +9,6 @@
     "chat.language.disabled": "^gray;Без перекладу",
     "tooltips.languages.name": "Мова: %s",
     "chat.alerts.languages.unknown": "^red;Ви не знаєте %s мову",
-    "chat.alerts.languages.selected": "Слова у \"Цитаті\" буде надіслано %s мовою",
+    "chat.alerts.languages.selected": "Слова у \"Цитаті\" буде надіслано ^green;%s^reset; мовою",
     "tooltips.languages.proficiency": "Майстерність: %s"
 }

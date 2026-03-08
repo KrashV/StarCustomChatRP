@@ -9,6 +9,6 @@
     "chat.language.disabled": "^gray;Aucune traduction",
     "tooltips.languages.name": "Language: %s",
     "chat.alerts.languages.unknown": "^red;Vous ne connaissez pas la langue %s",
-    "chat.alerts.languages.selected": "Les textes entre \"Guillemets\" seront envoyés en langue %s",
+    "chat.alerts.languages.selected": "Les textes entre \"Guillemets\" seront envoyés en langue ^green;%s^reset;",
     "tooltips.languages.proficiency": "Maîtrise: %s"
 }
