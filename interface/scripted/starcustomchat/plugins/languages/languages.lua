@@ -90,7 +90,8 @@ function languages:formatIncomingMessage(message)
 
     message.text = message.text:gsub('%b""', function(quoted)
       local content = quoted:sub(2, -2)
-      content = applyTransformation(content, languageConfig and self.languagesLevels[code].knowledge, languageConfig)
+      local knowledge = self.languagesLevels[code] and self.languagesLevels[code].knowledge or 0
+      content = applyTransformation(content, languageConfig and knowledge, languageConfig)
       return '"' .. content .. '"'
     end)
 
