@@ -1,5 +1,4 @@
 require "/interface/scripted/starcustomchat/plugin.lua"
-require "/interface/BiggerChat/scripts/utf8.lua"
 require "/interface/scripted/starcustomchat/plugins/languages/languageUtils.lua"
 
 languages = PluginClass:new(
@@ -32,6 +31,9 @@ function languages:registerMessageHandlers()
     if serverLanguagesData then
       self.serverLanguagesData = serverLanguagesData
       widget.setButtonEnabled("lytLeftMenu.saButtons.btnSelectRPLanguage", true)
+      widget.setData("lytLeftMenu.saButtons.btnSelectRPLanguage", {
+        displayText = "chat.buttons.language"
+      })
       self:populateLanguageList()
     end
   end)
@@ -88,15 +90,25 @@ function languages:formatIncomingMessage(message)
     local code = message.data.SCCRPLanguageCode
     local languageConfig = self.serverLanguagesData[code]
 
+    local hasContent = false
     message.text = message.text:gsub('%b""', function(quoted)
+      hasContent = true
       local content = quoted:sub(2, -2)
       local knowledge = self.languagesLevels[code] and self.languagesLevels[code].knowledge or 0
       content = applyTransformation(content, languageConfig and knowledge, languageConfig)
-      return '"' .. content .. '"'
+      content = (self.serverLanguagesData[code].prefix and self.serverLanguagesData[code].prefix .. " " or "") .. content
+
+      local languageStyle = (self.serverLanguagesData[code].color and ("^" .. self.serverLanguagesData[code].color .. ";") or "") .. 
+        (self.serverLanguagesData[code].font and ("^font=" .. self.serverLanguagesData[code].font .. ";") or "") .. 
+        (self.serverLanguagesData[code].directives or "")
+
+      return '"' .. starcustomchat.utils.styleText(message, languageStyle, content) .. '"'
     end)
 
-    message.languageName = message.data.SCCRPLanguageName
-    message.languageCode = code
+    if not hasContent then
+      message.data.SCCRPLanguageName = nil
+      message.data.SCCRPLanguageCode = nil
+    end
   end
 
   math.randomseed(os.time())
@@ -104,26 +116,32 @@ function languages:formatIncomingMessage(message)
 end
 
 function languages:onCreateTooltip(screenPosition)
-  local selectedMessage = self.customChat:selectMessage()
-  if selectedMessage and selectedMessage.languageName then
-    return starcustomchat.utils.getTranslation("tooltips.languages.name", selectedMessage.languageName)
+  local selectedMessage = self.customChat:selectMessage(screenPosition)
+  if selectedMessage and selectedMessage.data and selectedMessage.data.SCCRPLanguageName then
+    return starcustomchat.utils.getTranslation("tooltips.languages.name", selectedMessage.data.SCCRPLanguageName)
   end
 end
 
 function languages:formatOutcomingMessage(message)
   if self.serverLanguagesData and self.selectedLanguage and message.text then
     local originalText = message.text
+    local hasContent = false
 
-    message.data = message.data or {} 
-    message.data.SCCRPLanguageCode = self.selectedLanguage
-    message.data.SCCRPLanguageName = self.serverLanguagesData[self.selectedLanguage].name
+    local transformedText = originalText:gsub('%b""', function(quoted)
+      hasContent = true
+      -- when echoing to self we always treat the language as fully unknown
+      return applyTransformation(quoted, 0, self.serverLanguagesData[self.selectedLanguage] or {})
+    end)
 
-    message.silent = true
-    if message.mode ~= "Whisper" then
-      player.say(originalText:gsub('%b""', function(quoted)
-        -- when echoing to self we always treat the language as fully unknown
-        return applyTransformation(quoted, 0, self.serverLanguagesData[message.data.SCCRPLanguageCode] or {})
-      end))
+    if hasContent then
+      message.data = message.data or {} 
+      message.data.SCCRPLanguageCode = self.selectedLanguage
+      message.data.SCCRPLanguageName = self.serverLanguagesData[self.selectedLanguage].name
+
+      message.silent = true
+      if message.mode ~= "Whisper" then
+        player.say(transformedText)
+      end
     end
   end
   return message
@@ -166,6 +184,9 @@ function languages:onCustomButtonClick(btnName, data)
         widget.setVisible("lytSelectLanguage", false)
       end
     end
+
+    local languageName = self.selectedLanguage and self.serverLanguagesData[self.selectedLanguage].name or nil
+
     widget.setButtonImages("lytLeftMenu.saButtons.btnSelectRPLanguage", {
       base = string.format("/interface/scripted/starcustomchat/plugins/languages/interface/languages%s.png", self.selectedLanguage and "selected" or ""),
       hover = string.format("/interface/scripted/starcustomchat/plugins/languages/interface/languages%shover.png",  self.selectedLanguage and "selected" or "")
@@ -173,9 +194,18 @@ function languages:onCustomButtonClick(btnName, data)
 
     widget.setData("lytLeftMenu.saButtons.btnSelectRPLanguage", {
       displayText = "chat.buttons.language",
-      displayPlainText = self.selectedLanguage and self.serverLanguagesData[self.selectedLanguage].name or nil
+      displayPlainText = languageName
     })
+
+    self:onLocaleChange()
   end
+end
+
+function languages:onLocaleChange()
+  local hint = starcustomchat.utils.getTranslation("chat.textbox.hint")
+  local languageName = self.selectedLanguage and self.serverLanguagesData[self.selectedLanguage].name or nil
+
+  self.customChat:setHint(hint .. (languageName and " (" .. languageName ..")" or ""))
 end
 
 function languages:onChatScroll(screenPosition)

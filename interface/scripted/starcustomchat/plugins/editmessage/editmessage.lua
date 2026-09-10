@@ -9,8 +9,9 @@ function editmessage:init(chat)
   self.editingMessage = config.getParameter("editingMessage")
 
   if self.editingMessage then
+    local text = string.gsub(self.editingMessage.text, "\n", "    ")
     self.customChat:openSubMenu("edit", starcustomchat.utils.getTranslation("chat.editing.hint"), 
-    starcustomchat.utils.cropMessage(self.editingMessage.text, self.trimLength))
+    starcustomchat.utils.cropMessage(text, self.trimLength))
   end
 
   self.stagehandEnabled = false
@@ -22,9 +23,10 @@ end
 
 function editmessage:onLocaleChange()
   if self.editingMessage then
+    local text = string.gsub(self.editingMessage.text, "\n", "    ")
     self.customChat:openSubMenu("edit", 
       starcustomchat.utils.getTranslation("chat.editing.hint"), 
-      starcustomchat.utils.cropMessage(self.editingMessage.text, self.trimLength))
+      starcustomchat.utils.cropMessage(text, self.trimLength))
   end
 end
 
@@ -43,7 +45,7 @@ end
 function editmessage:onTextboxEnter()
   if self.editingMessage then
     local data = {
-      text = widget.getText("tbxInput"),
+      text = self.customChat:getText(),
       uuid = self.editingMessage.uuid,
       connection = self.editingMessage.connection,
       mode = self.editingMessage.mode,
@@ -82,24 +84,69 @@ function editmessage:contextMenuButtonClick(buttonName, selectedMessage)
     self.editingMessage = selectedMessage
 
     local cleartext = starcustomchat.utils.clearMetatags(selectedMessage.text)
-    cleartext = string.gsub(cleartext, "\n", "\\n")
+    
     self.customChat:openSubMenu("edit", 
       starcustomchat.utils.getTranslation("chat.editing.hint"), 
-      starcustomchat.utils.cropMessage(cleartext, self.trimLength))
-    widget.focus("tbxInput")
-    widget.setText("tbxInput", cleartext)
+      starcustomchat.utils.cropMessage(string.gsub(cleartext, "\n", "    "), self.trimLength))
+    self.customChat:focusInput()
+    self.customChat:setText(cleartext)
   end
 end
 
-function editmessage:onBackgroundChange(chatConfig)
-  chatConfig.editingMessage = self.editingMessage
-  return chatConfig
+local function hasShiftOrCtrl(mods)
+  if not mods then
+    return false
+  end
+
+  return mods.LShift or mods.RShift or mods.LCtrl or mods.RCtrl
+    or index(mods, "LShift") ~= 0 or index(mods, "RShift") ~= 0
+    or index(mods, "LCtrl") ~= 0 or index(mods, "RCtrl") ~= 0
 end
 
+function editmessage:processEvents(events)
+  for _, event in ipairs(events) do 
+    if event.type == "KeyDown" and event.data.key == "Up" and not hasShiftOrCtrl(event.data.mods) then
+      if self.customChat:hasFocusInput() and self.customChat:getText() == "" and not self.customChat:getSubMenuType() then
+        local myConnection = starcustomchat.utils.entityIdToConnection(player.id())
+        local messages = self.customChat:findMessagesByConnection(myConnection)
+
+        if #messages > 0 then
+          local selectedMessage = messages[1]
+
+          if selectedMessage and selectedMessage.uuid and selectedMessage.mode ~= "CommandResult" and not selectedMessage.image then
+            self.editingMessage = selectedMessage
+
+            local cleartext = starcustomchat.utils.clearMetatags(selectedMessage.text)
+            self.customChat:openSubMenu("edit",
+              starcustomchat.utils.getTranslation("chat.editing.hint"),
+              starcustomchat.utils.cropMessage(string.gsub(cleartext, "\n", "    "), self.trimLength))
+            self.customChat:focusInput()
+            self.customChat:setText(cleartext)
+
+            local targetIsInsideChat = selectedMessage.offset and selectedMessage.height
+              and self.customChat:isInsideChat(
+                selectedMessage,
+                selectedMessage.offset,
+                self.customChat.config.spacings.name + self.customChat.config.fontSize + 1,
+                self.customChat.canvas:size()
+              )
+
+            if not targetIsInsideChat then
+              local canvasHeight = self.customChat.canvas:size()[2]
+              local targetY = (canvasHeight + selectedMessage.height) / 2
+              self.customChat:scrollToMessage(self.customChat:findMessageByUUID(selectedMessage.uuid), targetY)
+            end
+          end
+        end
+      end
+    end
+  end
+end
 
 function editmessage:onSubMenuClose(buttonName, data)
   if self.editingMessage then
     self.editingMessage = nil
-    widget.blur("tbxInput")
+    self.customChat:blurInput()
+    self.customChat:setText("")
   end
 end

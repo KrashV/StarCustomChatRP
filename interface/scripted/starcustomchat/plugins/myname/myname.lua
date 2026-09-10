@@ -47,32 +47,45 @@ function myname:formatIncomingMessage(message)
   end
 
   if not self.coloringEnabled then
+    local handled = false
     for _, name in ipairs(self.myNameList) do
-      if message.text:find(name:lower(), nil, true) then
-        message.myNameToHighlight = true
-        table.insert(self.highlightMessages, message)
-        if self.pingEnabled then
-          pane.playSound(self.pingSound)
-          starcustomchat.utils.alert("settings.plugins.myname.name_used", message.nickname)
+      for word in message.text:gmatch("[^%s%p]+") do
+        if utf8.lower(word):sub(1, #name) == utf8.lower(name) then
+          if not handled then
+            message.myNameToHighlight = true
+            table.insert(self.highlightMessages, message)
+
+            if self.pingEnabled and not message.edited then
+              pane.playSound(self.pingSound)
+              starcustomchat.utils.alert(
+                "settings.plugins.myname.name_used",
+                message.nickname
+              )
+            end
+
+            handled = true
+          end
+
+          return message
         end
-        return message
       end
     end
   else
     local handled = false
+    local nameStyle = "^" .. self.customChat:getColor("myname") .. ";"
     message.text = message.text:gsub("[^%s%p]+", function(word)
       for _, name in ipairs(self.myNameList) do
-        if word:lower() == name:lower() then
+        if utf8.lower(word):sub(1, #name) == utf8.lower(name) then
           if not handled then
             message.myNameToHighlight = true
             table.insert(self.highlightMessages, message)
-            if self.pingEnabled then
+            if self.pingEnabled and not message.edited then
               pane.playSound(self.pingSound)
               starcustomchat.utils.alert("settings.plugins.myname.name_used", message.nickname)
             end
             handled = true
           end
-          return "^set;^" .. self.customChat:getColor("myname") .. ";" .. name .. "^reset;"
+          return starcustomchat.utils.styleText(message, nameStyle, word)
         end
       end
       return word
